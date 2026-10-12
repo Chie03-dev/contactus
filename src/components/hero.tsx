@@ -1,4 +1,8 @@
-import { focusRing, underlineLink } from "@/components/ui/link";
+import {
+  cutoutButtonGhost,
+  cutoutButtonPrimary,
+} from "@/components/ui/link";
+import { DoodleStar } from "@/components/ui/doodles";
 
 const FACTS = [
   "All prices in PHP",
@@ -9,15 +13,15 @@ const FACTS = [
 
 /** At-a-glance entry prices — the rate card's summary strip. */
 const GLANCE = [
-  { label: "Web", from: "₱15,000" },
-  { label: "Mobile", from: "₱60,000" },
-  { label: "Systems", from: "₱80,000" },
+  { label: "Web", from: "₱15,000", tilt: "-rotate-1" },
+  { label: "Mobile", from: "₱60,000", tilt: "rotate-1" },
+  { label: "Systems", from: "₱80,000", tilt: "-rotate-1" },
 ];
 
 /**
  * Masthead plate: the headline is the page. Mono eyebrow, oversized display
- * serif with an italic emphasis, a mono spec line, and two underlined text
- * links — no buttons, no glow, no grid.
+ * serif with an italic emphasis and a marker swipe, a mono spec line, cutout
+ * CTAs, and price-tag cards for the at-a-glance strip.
  */
 export function Hero() {
   return (
@@ -33,7 +37,7 @@ export function Hero() {
         className="mt-6 max-w-4xl font-display text-[2.6rem] leading-[1.02] tracking-[-0.01em] text-ink sm:text-6xl md:text-7xl"
       >
         Transparent pricing for{" "}
-        <em className="italic">Philippine web, mobile &amp; systems</em>{" "}
+        <em className="marker italic">Philippine web, mobile &amp; systems</em>{" "}
         development
       </h1>
       <p className="mt-7 max-w-xl font-body text-lg leading-relaxed text-ink-muted">
@@ -45,31 +49,41 @@ export function Hero() {
         {FACTS.join("  ·  ")}
       </p>
       <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-3">
-        <a href="#pricing" className={`font-mono text-xs uppercase tracking-[0.12em] text-ink underline decoration-accent decoration-1 underline-offset-4 transition-colors duration-200 ease-standard hover:text-accent-deep ${focusRing}`}>
+        <a href="#pricing" className={cutoutButtonPrimary}>
           View pricing
           <span aria-hidden> ↓</span>
         </a>
-        <a href="#contact" className={underlineLink}>
+        <a href="#contact" className={cutoutButtonGhost}>
           Get a quote
           <span aria-hidden> →</span>
         </a>
       </div>
 
-      <div className="mt-14 border-t border-rule pt-6">
-        <p className="font-mono text-xs uppercase tracking-[0.14em] text-ink-muted">
+      <div className="mt-16">
+        <p className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.14em] text-ink-muted">
           At a glance — starting at
+          <DoodleStar className="h-3 w-3 text-accent" />
         </p>
-        <dl className="mt-4 grid gap-x-10 gap-y-4 sm:grid-cols-3">
+        <dl className="mt-4 grid gap-x-10 gap-y-6 sm:grid-cols-3">
           {GLANCE.map((item) => (
-            <div key={item.label} className="flex items-baseline gap-3">
+            <div
+              key={item.label}
+              className={`cutout shadow-hard relative bg-paper-2 px-5 py-4 ${item.tilt}`}
+            >
+              <span aria-hidden className="tape left-6" />
               <dt className="font-mono text-xs uppercase tracking-[0.14em] text-ink-muted">
                 {item.label}
               </dt>
-              <span aria-hidden className="leader" />
-              <dd className="font-display text-2xl text-ink">{item.from}</dd>
+              <dd className="mt-1 font-display text-3xl leading-none text-ink">
+                {item.from}
+              </dd>
             </div>
           ))}
         </dl>
+        <p className="mt-5 flex items-center gap-2 font-hand text-xl text-accent-deep">
+          no hidden fees, promise
+          <DoodleStar className="h-4 w-4 text-accent" />
+        </p>
       </div>
     </section>
   );

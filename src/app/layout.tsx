@@ -1,13 +1,18 @@
 import type { Metadata, Viewport } from "next";
-import { IBM_Plex_Mono, Instrument_Serif, Newsreader } from "next/font/google";
+import {
+  Caveat,
+  IBM_Plex_Mono,
+  Instrument_Serif,
+  Newsreader,
+} from "next/font/google";
 
 import { site } from "@/lib/site";
 
 import "./globals.css";
 
 // Rate Card type system: Instrument Serif for display, Newsreader for body,
-// IBM Plex Mono for data (prices, labels, rules). Loaded via next/font so
-// there is no runtime CDN request and no layout shift.
+// IBM Plex Mono for data, Caveat for hand-written annotations (tape labels,
+// margin notes, stamps). Loaded via next/font — no runtime CDN, no shift.
 const display = Instrument_Serif({
   subsets: ["latin"],
   weight: "400",
@@ -26,6 +31,13 @@ const mono = IBM_Plex_Mono({
   subsets: ["latin"],
   weight: ["400", "500"],
   variable: "--font-plex-mono",
+  display: "swap",
+});
+
+const hand = Caveat({
+  subsets: ["latin"],
+  weight: ["500", "700"],
+  variable: "--font-caveat",
   display: "swap",
 });
 
@@ -85,11 +97,11 @@ export default function RootLayout({
   return (
     <html lang="en-PH">
       <body
-        className={`${display.variable} ${body.variable} ${mono.variable} min-h-screen bg-paper font-body text-ink antialiased`}
+        className={`${display.variable} ${body.variable} ${mono.variable} ${hand.variable} min-h-screen bg-paper font-body text-ink antialiased`}
       >
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:border focus:border-ink focus:bg-ink focus:px-4 focus:py-2 focus:font-mono focus:text-xs focus:uppercase focus:tracking-[0.14em] focus:text-paper"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:border-2 focus:border-ink focus:bg-ink focus:px-4 focus:py-2 focus:font-mono focus:text-xs focus:uppercase focus:tracking-[0.14em] focus:text-paper"
         >
           Skip to content
         </a>

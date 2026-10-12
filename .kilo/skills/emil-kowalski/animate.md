@@ -38,9 +38,9 @@
 
 - Scale/translate from the edge closest to the trigger (a card grows from where
   the pointer entered; a dropdown scales from its top edge).
-- Rows and list items on hover: background step (`paper` → `paper-2`),
-  150–200ms — no movement. Links may shift 2–3px on hover; content itself
-  never translates.
+- Rows and list items on hover: cutouts lift 2px toward the viewer
+  (`translate(-2px, -2px)`, transform only — the hard shadow travels with
+  the element), 150ms. Press sinks 1px. Non-cutout links shift color only.
 
 ## Reduced motion
 

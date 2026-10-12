@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
 /*
- * Rate Card design system — see DESIGN.md for the full contract.
- * Warm paper, near-black ink, one vermillion accent. Display serif +
- * body serif + mono for data. Print discipline: no rounded corners, no
- * shadows, no gradients, no glow. Depth comes from rules and background
- * steps (paper -> paper-2), like a printed sheet.
+ * Rate Card design system, cartoon-paper edition — see DESIGN.md.
+ * Warm paper, near-black ink, one vermillion accent, marker yellow for
+ * highlights. Print discipline: no rounded corners, no gradients, no blur.
+ * Depth = thick ink borders + hard offset shadows (cutouts). The sheet is a
+ * physical object: paper grain, crumple shading, tape, and doodles.
  */
 @theme inline {
   --color-paper: #f7f3ea;
@@ -16,10 +16,12 @@
   --color-accent-deep: #a82f16;
   --color-rule: #d8d1bf;
   --color-rule-strong: #b3aa92;
+  --color-marker: #ffe27a;
 
   --font-display: var(--font-instrument);
   --font-body: var(--font-newsreader);
   --font-mono: var(--font-plex-mono);
+  --font-hand: var(--font-caveat);
 
   --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -51,13 +53,124 @@
   }
 }
 
-/* Dotted leader: the space between a rate-card entry and its price, like a
-   printed menu. A flex child that expands to fill the row. */
+/* Dotted leader: the space between a rate-card entry and its price. */
 .leader {
   flex: 1 1 auto;
   min-width: 1.5rem;
   border-bottom: 1px dotted var(--color-rule-strong);
   transform: translateY(-0.3em);
+}
+
+/* --- Paper stock ------------------------------------------------------- */
+
+/* Fiber grain: tiled fractal noise, neutralized, at low opacity. */
+.paper-grain {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.07;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Crumple: cloudy shading where the sheet was folded, plus two faint
+   creases. Static decoration only. */
+.paper-crumple {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      45% 30% at 18% 22%,
+      rgba(28, 25, 23, 0.04),
+      transparent 70%
+    ),
+    radial-gradient(
+      40% 35% at 82% 12%,
+      rgba(28, 25, 23, 0.035),
+      transparent 70%
+    ),
+    radial-gradient(
+      50% 40% at 75% 78%,
+      rgba(28, 25, 23, 0.035),
+      transparent 70%
+    ),
+    radial-gradient(
+      35% 30% at 12% 85%,
+      rgba(28, 25, 23, 0.04),
+      transparent 70%
+    ),
+    repeating-linear-gradient(
+      102deg,
+      transparent 0 180px,
+      rgba(28, 25, 23, 0.02) 180px 181px
+    ),
+    repeating-linear-gradient(
+      -8deg,
+      transparent 0 320px,
+      rgba(28, 25, 23, 0.016) 320px 321px
+    );
+}
+
+/* --- Cutout system: thick ink borders + hard offset shadows ------------- */
+
+.cutout {
+  border: 2.5px solid var(--color-ink);
+}
+
+.shadow-hard {
+  box-shadow: 5px 5px 0 var(--color-ink);
+}
+
+.shadow-hard-accent {
+  box-shadow: 5px 5px 0 var(--color-accent);
+}
+
+/* Lift on hover: the cutout steps toward the viewer, shadow in tow. */
+.lift {
+  transition:
+    transform 150ms var(--ease-standard),
+    box-shadow 150ms var(--ease-standard);
+}
+
+.lift:hover {
+  transform: translate(-2px, -2px);
+}
+
+.lift:active {
+  transform: translate(1px, 1px);
+}
+
+/* Washi tape strip: translucent, slightly glossy, torn-look dashed edges. */
+.tape {
+  position: absolute;
+  top: -13px;
+  left: 28px;
+  width: 84px;
+  height: 26px;
+  background: color-mix(in oklab, var(--color-accent) 22%, #fdfbf5);
+  border-left: 1px dashed rgba(28, 25, 23, 0.3);
+  border-right: 1px dashed rgba(28, 25, 23, 0.3);
+  box-shadow: 0 1px 0 rgba(28, 25, 23, 0.08);
+}
+
+/* Marker swipe: a highlighter pass behind the lower half of the text. */
+.marker {
+  background-image: linear-gradient(
+    to top,
+    transparent 8%,
+    var(--color-marker) 8%,
+    var(--color-marker) 82%,
+    transparent 82%
+  );
+  padding: 0 0.12em;
+}
+
+/* Rubber stamp: double border, rotated by the caller. */
+.stamp {
+  border: 2px solid var(--color-accent);
+  box-shadow: inset 0 0 0 1px var(--color-paper), inset 0 0 0 2.5px var(--color-accent);
 }
 
 /* Reduced motion is a first-class path: no transforms, no keyframes, no

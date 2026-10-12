@@ -10,20 +10,28 @@ import { Rail } from "@/components/rail";
 
 export default function Home() {
   return (
-    <div className="min-h-screen">
-      <Masthead />
-      <div className="mx-auto flex w-full max-w-6xl">
-        <Rail />
-        <main id="main" className="min-w-0 flex-1">
-          <Hero />
-          <Pricing />
-          <Process />
-          <Faq />
-          <Contact />
-        </main>
+    <>
+      {/* Paper stock sits behind everything. */}
+      <div aria-hidden className="paper-crumple" />
+      <div aria-hidden className="paper-grain" />
+
+      {/* The sheet itself: a thick ink frame, like a printed page. */}
+      <div className="relative z-10 m-2 min-h-screen border-[3px] border-ink sm:m-3">
+        <Masthead />
+        <div className="mx-auto flex w-full max-w-6xl">
+          <Rail />
+          <main id="main" className="min-w-0 flex-1">
+            <Hero />
+            <Pricing />
+            <Process />
+            <Faq />
+            <Contact />
+          </main>
+        </div>
+        <Footer />
       </div>
-      <Footer />
+
       <MobileBar />
-    </div>
+    </>
   );
 }

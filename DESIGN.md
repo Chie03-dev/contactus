@@ -9,11 +9,15 @@ the visual contract: components use these tokens and rules, nothing ad-hoc.
 - The page behaves like a printed studio rate card: masthead, rules, dotted
   leaders, roman-numeral sections, colophon. It should feel considered and
   permanent, not like a SaaS funnel.
-- Print discipline: zero rounded corners, zero shadows, zero gradients, zero
-  glow. Depth comes only from rules (hairlines) and background steps
-  (`paper` → `paper-2`).
-- No decorative icons, no emoji, no stock imagery. Marks are mono glyphs:
-  `§ № › + →`.
+- Cartoon-paper craft layer: the sheet is a *physical object*. Paper grain and
+  crumple shading sit behind everything; items are taped, cut out, stamped,
+  and marked like a working rate card on a studio wall. Warm and confident —
+  never clip-art cute.
+- Print discipline: no rounded corners (except the small circular Q/step
+  badges), no blurred shadows, no gradients, no glow. Depth = thick ink
+  borders + hard offset shadows.
+- No decorative icons, no emoji, no stock imagery. Marks are mono glyphs
+  (`§ № › + →`) and hand-drawn doodles (arrow, star, circle, underline).
 
 ## Color
 
@@ -27,6 +31,7 @@ the visual contract: components use these tokens and rules, nothing ad-hoc.
 | `--color-accent-deep` | `#a82f16` | Accent text (6.2:1 on paper) |
 | `--color-rule` | `#d8d1bf` | Hairline rules, default borders |
 | `--color-rule-strong` | `#b3aa92` | Group rules, dotted leaders, link underlines |
+| `--color-marker` | `#ffe27a` | Highlighter swipe behind emphasized words (functional only) |
 
 Contrast floor: body/muted/accent text ≥ 4.5:1 (actual 5.6–15.8:1), large
 display text ≥ 3:1. Ink (15.8:1) carries all prices; accent appears at large
@@ -41,6 +46,10 @@ Three Google fonts loaded via `next/font` (no runtime CDN, no layout shift):
 | Display | Instrument Serif 400 (regular + italic) | `font-display` |
 | Body | Newsreader (variable 200–800) | `font-body` |
 | Data | IBM Plex Mono 400/500 | `font-mono` |
+| Hand | Caveat 500/700 | `font-hand` |
+
+Hand font is for **margin notes only** (annotations, stamps, asides) — never
+for prices, labels, or UI text.
 
 Scale (desktop → mobile):
 
@@ -68,15 +77,40 @@ Emphasis is italic display serif — never bold, never color-only.
   under group headers (the "bold rule" of print). Masthead sits on a 1px ink
   rule.
 
+## Cutout & paper-craft system
+
+- **Page frame**: the whole sheet sits in a 3px ink border with a small page
+  margin (`m-2 sm:m-3`), like a printed page on a desk.
+- **Texture**: `.paper-grain` (tiled fractal noise, ~7% opacity) and
+  `.paper-crumple` (four faint shading blobs + two crease lines) are fixed,
+  behind the frame, `pointer-events: none`. Never place texture above text.
+- **Cutout**: 2.5px ink border + 5px hard offset shadow (`.cutout`,
+  `.shadow-hard`; accent shadow `.shadow-hard-accent` for primary buttons).
+  Hover lifts the cutout 2px toward the viewer (transform only, 150ms — the
+  shadow travels with it). Press sinks 1px.
+- **Tape** (`.tape`): translucent accent-tinted washi strip with dashed torn
+  edges, holding the at-a-glance price tags, the featured tier rows, the
+  WhatsApp row, and the colophon box.
+- **Marker** (`.marker`): highlighter swipe behind the lower ~75% of a word —
+  used on the hero's emphasized phrase and featured tier names only.
+- **Stamp** (`.stamp`): double-bordered vermillion label, rotated 2–3° —
+  "Most requested" (hand font) and "Starting estimates" (mono). One stamp
+  per purpose, never more than one visible per section.
+- **Doodles** (`ui/doodles.tsx`): hand-drawn arrow, star, circle, underline
+  in wobbly strokes. Max one doodle per component, always pointing at or
+  marking something meaningful. Never decorative-only filler.
+- **Rotation**: ±1° on the at-a-glance tags; 2–3° on stamps; nothing else.
+- **Hand notes**: one per major section, in Caveat, always additive
+  encouragement ("no hidden fees, promise"), never repeating body copy.
+
 ## Motion
 
-- Nearly none — print doesn't move. Allowed: 150–200ms color transitions on
-  hover (rows step to `paper-2`, links shift to `accent-deep`), the FAQ `+`
-  glyph rotating 45° when open, and CSS smooth scrolling.
-- No entrance animations, no parallax, no transforms on content. Exits and
-  hovers never exceed 200ms; easing `cubic-bezier(0.4, 0, 0.2, 1)`.
-- `prefers-reduced-motion: reduce` disables all transitions and smooth
-  scrolling; the sheet stays fully static and readable.
+- Nearly none — paper doesn&apos;t move. Allowed: 150ms cutout lift (transform
+  + shadow travel), 150–200ms color transitions, the FAQ `+` glyph rotating
+  45° when open, tape/stamp static tilts, and CSS smooth scrolling.
+- No entrance animations, no parallax. `prefers-reduced-motion: reduce`
+  disables all transitions and smooth scrolling; the sheet stays fully static
+  and readable.
 
 ## Component specs
 
@@ -101,44 +135,47 @@ The pricing sheet begins immediately below.
 ### Pricing (`pricing.tsx` + `tier-row.tsx`)
 
 - Group header: roman numeral (mono, accent) + group name (display) left,
-  tagline (mono small caps, muted) right, `border-b-2 border-ink` rule.
-- Tier rows separated by hairlines. Row = name (+ "Most requested" stamp for
+  tagline (mono small caps, muted) right, `border-b-[3px] border-ink` rule.
+- Tier rows are taped cutouts (2.5px ink border + hard shadow, `paper-2`
+  fill, 20px gap). Row = name (+ marker swipe + "Most requested" stamp for
   featured) and `Delivery — timeline · unit` (mono, muted) on the left; price
-  flush right under a mono "Starting at" label.
+  flush right under a mono "Starting at" label; featured price in accent.
 - Scope in a native `<details>`: summary is a mono "Scope +" toggle; open
   state reveals the summary sentence plus scope bullets in a 2-column list
   with mono `›` marks.
 - Each row ends with an underlined "Get a quote →" link.
-- Featured row: `border-l-2 border-l-accent`, `paper-2` fill, price in accent,
-  stamp in accent-deep. Exactly one featured row per group.
-- Sheet footnote in mono: "* All prices are starting points, in Philippine
-  pesos." + `site.disclaimer`.
+- Featured row: wash tape strip, marker swipe on the name, rotated stamp,
+  accent price. Exactly one featured row per group.
+- Sheet footnote in mono ("* All prices are starting points…") beside the
+  rotated "Starting estimates" stamp.
 - Data only from `src/content/pricing.ts`.
 
 ### Process (`process.tsx`)
 
-Numbered ledger: hanging mono numerals (first in accent, rest `rule-strong`),
-display step title, one serif line. Hairline rows, `border-t` on the list.
+Comic panels: 2-column grid of cutout cards (`paper-2`), circular badge with
+the step numeral (2.5px ink ring, paper fill), display step title, one serif
+line. First panel gets a doodle star. One hand note under the grid.
 
 ### FAQ (`faq.tsx`)
 
-Native `<details>` rows with mono "Q." mark, serif question, `+` glyph that
-rotates 45° when open, answer in Newsreader with a hanging indent.
+Native `<details>` index cards (cutouts, `paper-2`), circular "Q" badge,
+serif question, `+` glyph that rotates 45° when open, answer in Newsreader
+with a hanging indent aligned to the question.
 
 ### Contact (`contact.tsx`)
 
-Enquiries ledger: three rows (WhatsApp / Messenger / Email) — mono channel
-label, large underlined serif action, dotted leader, mono endpoint
-(`wa.me` / `m.me` / `mailto`). No form. Below: two hairline-topped columns,
-"Have this ready for a quote" and "What happens next", mono headings with
-serif lists.
+Enquiries ledger: three cutout rows (WhatsApp / Messenger / Email) — mono
+channel label, large underlined serif action, dotted leader, mono endpoint
+(`wa.me` / `m.me` / `mailto`). WhatsApp row is taped and carries a rotated
+"fastest!" hand note with a doodle arrow. No form. Below: two cutout cards
+(paper fill, not paper-2) — "Have this ready for a quote" and "What happens
+next" — mono headings with serif lists.
 
 ### Footer (`footer.tsx`)
 
-Colophon: name in display serif, disclaimer, and a mono block — "Set in
-Instrument Serif, Newsreader & IBM Plex Mono · Rate card v1.0 · ₱ · MMXXVI · ©
-year · GitHub" — plus footer anchor links. `pb-20` on mobile clears the
-bottom bar.
+Colophon "cut-and-keep" box: cutout with a dashed inner border 8px in,
+holding the type credits, version, copyright, GitHub link, and footer
+anchors. Left column stays bare: name (display), disclaimer (serif).
 
 ## Placeholder policy
 
