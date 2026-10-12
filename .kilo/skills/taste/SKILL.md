@@ -51,7 +51,7 @@ filler:
 
 - **Cutout** = 2.5px ink border + 5px hard offset shadow (ink or accent,
   never blurred). This is the depth system.
-- **Tape** holds things: at-a-glance tags, featured rows, the WhatsApp row,
+- **Tape** holds things: at-a-glance tags, featured rows, the Phone row,
   the colophon. One tape per item, rotated nothing.
 - **Marker** swipe highlights one emphasized word per card — the hero phrase
   and featured tier names. Nothing else.

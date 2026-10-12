@@ -22,6 +22,9 @@ export function Footer() {
             {site.role}. Based in the Philippines, working with clients
             remotely.
           </p>
+          <p className="mt-1 max-w-md font-body leading-relaxed text-ink-muted">
+            Team: {site.team.join(" · ")}.
+          </p>
           <p className="mt-4 max-w-md font-body text-sm leading-relaxed text-ink-muted">
             {site.disclaimer}
           </p>

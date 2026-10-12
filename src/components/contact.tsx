@@ -33,23 +33,18 @@ export function Contact() {
       id="contact"
       eyebrow="§ Contact"
       title="Let’s talk about your project"
-      lede="This site is informational — send a message on whichever channel you prefer and I will take it from there. WhatsApp gets the fastest reply."
+      lede="This site is informational — send a message on whichever channel you prefer and I will take it from there. A call or text gets the fastest reply."
     >
       <ul className="mt-14 grid gap-6">
         <li className="cutout shadow-hard relative bg-paper-2">
           <span aria-hidden className="tape left-8" />
           <div className="flex items-baseline gap-4 px-5 py-7">
-            <span className={labelClass}>WhatsApp</span>
-            <a
-              href={`https://wa.me/${site.whatsapp}?text=${encodeURIComponent("Hi! I would like a quote for my project.")}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={ledgerLink}
-            >
-              Message on WhatsApp
+            <span className={labelClass}>Phone</span>
+            <a href={`tel:${site.phoneHref}`} className={ledgerLink}>
+              Call or text {site.phone}
             </a>
             <span aria-hidden className="leader" />
-            <span className={endpointClass}>wa.me</span>
+            <span className={endpointClass}>{site.phoneIntl}</span>
           </div>
           <p className="absolute -right-2 -top-3 rotate-6 font-hand text-lg font-bold text-accent-deep">
             fastest! <DoodleArrow className="inline h-5 w-6 -rotate-90" />
@@ -86,6 +81,30 @@ export function Contact() {
       </ul>
 
       <div className="mt-14 grid gap-10 sm:grid-cols-2">
+        <div className="cutout bg-paper p-6 sm:col-span-2">
+          <h3 className="font-mono text-xs uppercase tracking-[0.14em] text-ink">
+            Who you&apos;ll work with
+          </h3>
+          <ul className="mt-4 grid gap-2 font-body leading-relaxed text-ink-muted sm:grid-cols-3">
+            {site.team.map((member, index) => (
+              <li key={member} className="flex gap-2.5">
+                <span aria-hidden className="font-mono text-accent">
+                  ›
+                </span>
+                <span>
+                  {member}
+                  {index === 0 ? (
+                    <span className="text-ink"> — development</span>
+                  ) : null}
+                </span>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-4 font-body text-sm leading-relaxed text-ink-muted">
+            A three-person team. {site.name} is your developer — you talk to
+            the person building the thing, every time.
+          </p>
+        </div>
         <div className="cutout bg-paper p-6">
           <h3 className="font-mono text-xs uppercase tracking-[0.14em] text-ink">
             Have this ready for a quote
