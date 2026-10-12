@@ -116,18 +116,12 @@ Emphasis is italic display serif — never bold, never color-only.
 ### Header pill (`nav-bar.tsx`)
 
 The only header: one sticky cutout pinned just inside the page frame
-(`sticky top-2 sm:top-3`), centered at `max-w-5xl`, vermillion hard shadow.
-Two rows in a single object — never two competing bars:
-
-- **Nav row:** ₱ mark in an ink square → "RATE CARD № 01" (mono, hidden below
-  `sm`) → ink divider → roman-numeral section links I–IV (mono small caps;
-  the strip is `overflow-x-auto` with hidden scrollbars below `sm`) → "Get a
-  quote →" cutout button (hidden below `sm`).
-- **Date row:** 2px ink rule above; left "Alchie Andilab — Web, Mobile &
-  Systems Developer" (role hidden below `sm`, truncated), right "Manila, PH ·
-  MMXXVI", both mono ~11px uppercase muted.
-
-No hamburger, no JS, no separate masthead.
+(`sticky top-2 sm:top-3`), centered at `max-w-4xl`, vermillion hard shadow.
+One row, left to right: ₱ mark in an ink square → "RATE CARD" (mono) → ink
+divider → plain section links — Pricing, Process, FAQ, Contact (mono small
+caps; the strip is `overflow-x-auto` with hidden scrollbars below `sm`) →
+"Get a quote →" cutout button (hidden below `sm`). No numerals, no date
+line, no hamburger, no JS.
 
 ### Hero (`hero.tsx`)
 
