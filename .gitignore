@@ -35,3 +35,24 @@ Desktop.ini
 # testing
 /test-results
 /playwright-report
+
+# ai coding agents
+.kilo/
+.kilocode/
+.opencode/
+AGENTS.md
+.clinerules
+.cursor/
+.cursorrules
+.claude/
+.windsurf/
+.windsurfrules
+.aider*
+.continue/
+.github/copilot-instructions.md
+
+# editor
+.vscode/
+
+# personal scratch notes
+*.local.md
