@@ -20,11 +20,11 @@
 - Delight lives in details (a perfect easing curve, a 1px highlight on a card
   edge), not in spectacle.
 
-## 4. Depth from light, not from shadow stacks
+## 4. Depth from rules, not from shadow stacks
 
-- On dark surfaces, "raised" means a slightly lighter background plus a hairline
-  top border that catches the light — not a large blur shadow.
-- Shadows, when used, are soft, dark, and tight (`0 24px 48px -24px`).
+- On paper, "raised" means a background step plus a hairline rule — never a
+  shadow. Shadows, if ever justified, are soft, dark, and tight
+  (`0 24px 48px -24px`).
 
 ## 5. State is part of the design
 

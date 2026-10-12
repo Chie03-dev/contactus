@@ -1,43 +1,50 @@
 import { priceIntro, serviceGroups } from "@/content/pricing";
-import { cn } from "@/lib/utils";
+import { site } from "@/lib/site";
 
 import { Section } from "@/components/ui/section";
-import { TierCard } from "@/components/tier-card";
+import { TierRow } from "@/components/tier-row";
+
+const GROUP_NUMERALS = ["I", "II", "III"];
 
 export function Pricing() {
   return (
     <Section
       id="pricing"
-      eyebrow={priceIntro.eyebrow}
+      eyebrow="§ Pricing"
       title={priceIntro.title}
       lede={priceIntro.lede}
     >
-      <div className="mt-14 space-y-16">
-        {serviceGroups.map((group) => (
+      <div className="mt-16 space-y-20">
+        {serviceGroups.map((group, groupIndex) => (
           <div key={group.id} data-group={group.id}>
-            <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-b border-line pb-4">
-              <h3 className="font-mono text-sm font-semibold uppercase tracking-[0.08em] text-ink">
-                {group.name}
-              </h3>
-              <p className="text-sm text-ink-muted">{group.tagline}</p>
+            <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-b-2 border-ink pb-3">
+              <div className="flex items-baseline gap-4">
+                <span
+                  aria-hidden
+                  className="font-mono text-sm text-accent"
+                >
+                  {GROUP_NUMERALS[groupIndex]}
+                </span>
+                <h3 className="font-display text-3xl leading-none text-ink md:text-4xl">
+                  {group.name}
+                </h3>
+              </div>
+              <p className="font-mono text-xs uppercase tracking-[0.14em] text-ink-muted">
+                {group.tagline}
+              </p>
             </div>
-            <div
-              className={cn(
-                "mt-6 grid gap-5 sm:grid-cols-2",
-                group.tiers.length > 2 && "lg:grid-cols-3",
-              )}
-            >
-              {group.tiers.map((tier, index) => (
-                <TierCard
-                  key={tier.id}
-                  tier={tier}
-                  delay={index * 60}
-                />
+            <div className="mt-2 border-t border-rule">
+              {group.tiers.map((tier) => (
+                <TierRow key={tier.id} tier={tier} />
               ))}
             </div>
           </div>
         ))}
       </div>
+      <p className="mt-10 max-w-xl font-mono text-xs leading-relaxed text-ink-muted">
+        * All prices are starting points, in Philippine pesos.{" "}
+        {site.disclaimer}
+      </p>
     </Section>
   );
 }

@@ -4,8 +4,10 @@ Project instructions for Kilo and any AI agent working in this repo.
 
 ## Read first
 
-1. `DESIGN.md` — the visual contract (color/type/spacing/motion tokens and
-   per-component specs). All UI decisions come from there.
+1. `DESIGN.md` — the visual contract (rate-card token sheet: color/type/
+   spacing/motion tokens and per-component specs). All UI decisions come from
+   there. The design language is a printed rate card: paper/ink/vermillion,
+   hairlines and dotted leaders, no cards/shadows/gradients.
 2. `.kilo/skills/taste/SKILL.md` — design judgment rules (no generic AI
    aesthetics, one accent, mono/sans pairing, hierarchy, a11y floor).
 3. `.kilo/skills/emil-kowalski/SKILL.md` (+ `animate.md`, `apple-design.md`) —
@@ -18,6 +20,8 @@ Project instructions for Kilo and any AI agent working in this repo.
   Tailwind CSS 4 (via `@tailwindcss/postcss`; tokens live in `src/app/globals.css`
   under `@theme inline`).
 - Utilities: `clsx` + `tailwind-merge` via `cn()` in `src/lib/utils.ts`.
+- Fonts: `next/font/google` only — Instrument Serif (display), Newsreader
+  (body), IBM Plex Mono (data). Never add a runtime webfont CDN link.
 - Static export for GitHub Pages: `output: "export"`, `trailingSlash: true`,
   `images.unoptimized`, `basePath: "/contactus"` (project page at
   https://chie03-dev.github.io/contactus/). This is a purely static,

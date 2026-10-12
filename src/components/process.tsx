@@ -2,36 +2,39 @@ import { processIntro, processSteps } from "@/content/process";
 
 import { Section } from "@/components/ui/section";
 
+/** Process as a numbered ledger: hanging numerals, hairline rows. */
 export function Process() {
   return (
     <Section
       id="process"
-      eyebrow={processIntro.eyebrow}
+      eyebrow="§ Process"
       title={processIntro.title}
       lede={processIntro.lede}
     >
-      <ol className="mt-14 grid gap-10 md:grid-cols-4 md:gap-6">
+      <ol className="mt-16 border-t border-rule">
         {processSteps.map((step, index) => (
           <li
             key={step.num}
-            className="animate-reveal border-t border-line pt-5"
-            style={{ animationDelay: `${index * 60}ms` }}
+            className="grid grid-cols-[3rem_1fr] gap-x-6 border-b border-rule py-8 md:grid-cols-[5rem_1fr]"
           >
-            <p
+            <span
+              aria-hidden
               className={
                 index === 0
-                  ? "font-mono text-sm font-semibold text-accent"
-                  : "font-mono text-sm font-semibold text-ink-muted"
+                  ? "font-mono text-2xl text-accent"
+                  : "font-mono text-2xl text-rule-strong"
               }
             >
               {step.num}
-            </p>
-            <h3 className="mt-2 text-lg font-semibold text-ink">
-              {step.title}
-            </h3>
-            <p className="mt-2 text-sm leading-relaxed text-ink-muted">
-              {step.body}
-            </p>
+            </span>
+            <div>
+              <h3 className="font-display text-2xl leading-tight text-ink md:text-3xl">
+                {step.title}
+              </h3>
+              <p className="mt-2 max-w-xl font-body leading-relaxed text-ink-muted">
+                {step.body}
+              </p>
+            </div>
           </li>
         ))}
       </ol>

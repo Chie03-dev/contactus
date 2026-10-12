@@ -16,19 +16,22 @@ choose the more restrained option.
   only permitted color mixing is a low-alpha tint of the accent on surfaces.
 - If two elements compete for the accent, one of them is wrong.
 
-## 2. Mono + sans pairing, with a job for each
+## 2. Serif display + serif body + mono data, with a job for each
 
-- Sans carries prose and headings. Mono carries *data*: prices, labels,
-  eyebrows, step numbers, timelines.
-- Never set long-form prose in mono; never set prices in sans.
-- Mono labels are uppercase, small, with generous letter-spacing.
+- Body serif (Newsreader) carries prose. Display serif (Instrument Serif)
+  carries headlines, with *italic* as the only emphasis — never bold, never
+  color-only. Mono (IBM Plex Mono) carries *data*: prices, labels, rules,
+  numerals.
+- Never set prices in serif-display weight changes or prose in mono. Mono
+  labels are uppercase, small, with generous letter-spacing.
 
 ## 3. Real hierarchy, not uniform cards
 
 - A section must have a clear dominant element before a reader scans anything
   else. Size, weight, and color each do one job — do not emphasize everything.
-- Tier cards share one anatomy; the *featured* tier may carry the accent
-  border/badge, the rest must stay visually calm so the hierarchy reads.
+- The rate card is a hairline-ruled list with dotted leaders, not a card grid;
+  one entry per group may carry the accent rule + "Most requested" stamp and
+  the rest stay visually calm so the hierarchy reads.
 - Section headers: mono eyebrow → large sans title → short muted lede. Keep the
   lede to one or two lines.
 
@@ -49,8 +52,8 @@ Banned outright:
 - Identical three-column "feature card" grids with icon + title + two lines,
   repeated section after section.
 - Centered hero, centered section title, centered everything.
-- `box-shadow` stacks for "depth" — this design uses borders and background
-  steps instead.
+- `box-shadow` stacks for "depth" — this design uses rules and background
+  steps instead. Rounded corners and gradients are also banned: print.
 - Stock-photo people shaking hands.
 
 ## 6. Motion serves comprehension

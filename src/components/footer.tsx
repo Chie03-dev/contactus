@@ -1,55 +1,57 @@
 import { Container } from "@/components/ui/container";
+import { focusRing } from "@/components/ui/link";
 import { site } from "@/lib/site";
 
-const FOOTER_ITEMS = [
+const COLOPHON_ITEMS = [
   { label: "Pricing", href: "#pricing" },
   { label: "Process", href: "#process" },
   { label: "FAQ", href: "#faq" },
   { label: "Contact", href: "#contact" },
 ];
 
+/** Colophon footer: the print convention of noting how the sheet was set. */
 export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-line py-12">
-      <Container className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
+    <footer className="border-t border-ink pb-20 lg:pb-0">
+      <Container className="grid gap-10 py-14 md:grid-cols-[1fr_auto]">
         <div>
-          <p className="font-mono text-sm font-semibold text-ink">
-            {site.name}
-          </p>
-          <p className="mt-2 max-w-md text-sm leading-relaxed text-ink-muted">
+          <p className="font-display text-2xl text-ink">{site.name}</p>
+          <p className="mt-2 max-w-md font-body leading-relaxed text-ink-muted">
             {site.role}. Based in the Philippines, working with clients
             remotely.
           </p>
-          <p className="mt-4 max-w-md text-xs leading-relaxed text-ink-muted">
+          <p className="mt-4 max-w-md font-body text-sm leading-relaxed text-ink-muted">
             {site.disclaimer}
           </p>
         </div>
-        <nav aria-label="Footer" className="flex gap-6 text-sm">
-          {FOOTER_ITEMS.map((item) => (
+        <div className="font-mono text-xs uppercase leading-relaxed tracking-[0.12em] text-ink-muted">
+          <p>Set in Instrument Serif, Newsreader &amp; IBM Plex Mono</p>
+          <p className="mt-2">Rate card v1.0 · ₱ · MMXXVI</p>
+          <p className="mt-2">
+            © {year} {site.name} ·{" "}
             <a
-              key={item.href}
-              href={item.href}
-              className="text-ink-muted transition-colors duration-200 hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+              href={site.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`text-ink underline decoration-rule-strong decoration-1 underline-offset-4 transition-colors duration-200 ease-standard hover:text-accent-deep ${focusRing}`}
             >
-              {item.label}
+              GitHub
             </a>
-          ))}
-        </nav>
-      </Container>
-      <Container className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-line pt-6 text-xs text-ink-muted">
-        <p>
-          © {year} {site.name}. All rights reserved.
-        </p>
-        <a
-          href={site.github}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="transition-colors duration-200 hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-        >
-          GitHub
-        </a>
+          </p>
+          <nav aria-label="Footer" className="mt-4 flex gap-5">
+            {COLOPHON_ITEMS.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className={`text-ink-muted transition-colors duration-200 ease-standard hover:text-accent-deep ${focusRing}`}
+              >
+                {item.label}
+              </a>
+            ))}
+          </nav>
+        </div>
       </Container>
     </footer>
   );

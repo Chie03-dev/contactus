@@ -38,7 +38,9 @@
 
 - Scale/translate from the edge closest to the trigger (a card grows from where
   the pointer entered; a dropdown scales from its top edge).
-- Cards lifting on hover: `translateY(-2px)` maximum — a jump, not a float.
+- Rows and list items on hover: background step (`paper` → `paper-2`),
+  150–200ms — no movement. Links may shift 2–3px on hover; content itself
+  never translates.
 
 ## Reduced motion
 
