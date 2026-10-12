@@ -178,9 +178,12 @@ headings with serif lists.
 
 ### Footer (`footer.tsx`)
 
-Colophon "cut-and-keep" box: cutout with a dashed inner border 8px in,
-holding the type credits, version, copyright, GitHub link, and footer
-anchors. Left column stays bare: name (display), disclaimer (serif).
+The designed sheet `public/footer.webp` (1859×846) runs **edge to edge**
+inside the frame: `next/image`, `w-full h-auto`, so it scales fluidly from
+desktop to mobile with no crop and no distortion. A 3px ink rule sits above
+it. All text the old colophon carried (name, role, team, disclaimer) lives
+in the image and its alt text; the disclaimer is also present as real text
+in the pricing footnote, and the team is listed in the contact section.
 
 ## Placeholder policy
 

@@ -1,67 +1,28 @@
-import { Container } from "@/components/ui/container";
-import { focusRing } from "@/components/ui/link";
-import { site } from "@/lib/site";
-
-const COLOPHON_ITEMS = [
-  { label: "Pricing", href: "#pricing" },
-  { label: "Process", href: "#process" },
-  { label: "FAQ", href: "#faq" },
-  { label: "Contact", href: "#contact" },
-];
-
-/** Colophon footer inside a cut-and-keep box. */
+/**
+ * Footer band: the designed sheet (public/footer.webp) runs edge to edge
+ * inside the frame, scaling fluidly from desktop to mobile. All the
+ * information the old text footer carried — name, role, team, and the
+ * "starting estimates" disclaimer — is preserved in the alt text and
+ * mirrored by the pricing footnote on the page.
+ */
 export function Footer() {
-  const year = new Date().getFullYear();
-
   return (
     <footer className="border-t-[3px] border-ink">
-      <Container className="grid gap-10 py-14 md:grid-cols-[1fr_auto]">
-        <div>
-          <p className="font-display text-2xl text-ink">{site.name}</p>
-          <p className="mt-2 max-w-md font-body leading-relaxed text-ink-muted">
-            {site.role}. Based in the Philippines, working with clients
-            remotely.
-          </p>
-          <p className="mt-1 max-w-md font-body leading-relaxed text-ink-muted">
-            Team: {site.team.join(" · ")}.
-          </p>
-          <p className="mt-4 max-w-md font-body text-sm leading-relaxed text-ink-muted">
-            {site.disclaimer}
-          </p>
-        </div>
-        <div className="cutout relative bg-paper p-6">
-          <span
-            aria-hidden
-            className="absolute inset-2 border border-dashed border-rule-strong"
-          />
-          <div className="relative font-mono text-xs uppercase leading-relaxed tracking-[0.12em] text-ink-muted">
-            <p>Set in Instrument Serif, Newsreader &amp; IBM Plex Mono</p>
-            <p className="mt-2">Rate card v1.0 · ₱ · MMXXVI</p>
-            <p className="mt-2">
-              © {year} {site.name} ·{" "}
-              <a
-                href={site.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`text-ink underline decoration-ink decoration-2 underline-offset-4 transition-colors duration-200 ease-standard hover:text-accent-deep ${focusRing}`}
-              >
-                GitHub
-              </a>
-            </p>
-            <nav aria-label="Footer" className="mt-4 flex gap-5">
-              {COLOPHON_ITEMS.map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  className={`text-ink-muted transition-colors duration-200 ease-standard hover:text-accent-deep ${focusRing}`}
-                >
-                  {item.label}
-                </a>
-              ))}
-            </nav>
-          </div>
-        </div>
-      </Container>
+      {/*
+        Relative src on purpose: the site is served under the /contactus
+        basePath, and next/image does not prefix basePath for unoptimized
+        images, so an absolute /footer.webp would 404 on GitHub Pages.
+        A relative URL resolves against the page and follows the basePath.
+      */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="footer.webp"
+        alt="Alchie Andilab — Web, Mobile & Systems Developer, Manila, PH. Team: Alchie Andilab · Luel Cabaltera · Reece Salon. Prices are starting estimates; final scope and quote are confirmed after discovery."
+        width={1859}
+        height={846}
+        decoding="async"
+        className="block h-auto w-full"
+      />
     </footer>
   );
 }

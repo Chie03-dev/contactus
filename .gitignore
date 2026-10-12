@@ -56,3 +56,7 @@ AGENTS.md
 
 # personal scratch notes
 *.local.md
+
+# markdown notes (DESIGN.md stays tracked as the design contract)
+*.md
+!DESIGN.md

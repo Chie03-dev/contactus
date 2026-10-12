@@ -92,13 +92,31 @@ test("contact section exposes direct channels with correct hrefs", async ({
   expect(await page.locator("#contact form").count()).toBe(0);
 });
 
+test("footer band renders the designed image full-bleed", async ({ page }) => {
+  const footer = page.locator("footer");
+  const img = footer.getByRole("img");
+  await expect(img).toBeVisible();
+
+  // The image must actually load through the basePath (a wrong path here
+  // 404s on GitHub Pages, which is why the src is relative).
+  const loaded = await img.evaluate(
+    (el) => (el as HTMLImageElement).complete && (el as HTMLImageElement).naturalWidth > 0,
+  );
+  expect(loaded).toBe(true);
+
+  const alt = await img.getAttribute("alt");
+  expect(alt).toContain("starting estimates");
+
+  const imgBox = await img.boundingBox();
+  const footerBox = await footer.boundingBox();
+  expect(imgBox!.width).toBeGreaterThanOrEqual(footerBox!.width - 6);
+});
+
 test("team members are listed", async ({ page }) => {
   const contact = page.locator("#contact");
   for (const member of site.team) {
     await expect(contact).toContainText(member);
   }
-  await expect(page.locator("footer")).toContainText("Luel Cabaltera");
-  await expect(page.locator("footer")).toContainText("Reece Salon");
 });
 
 test("all FAQ questions render and expand", async ({ page }) => {
@@ -235,7 +253,7 @@ test("key text meets AA contrast against the paper", async ({ page }) => {
       check("tier price", '[data-tier="landing-page"] .text-3xl'),
       check("section eyebrow", "#pricing header .text-accent-deep"),
       check("featured stamp", '[data-tier="business-site"] .text-accent-deep'),
-      check("footer disclaimer", "footer .text-sm"),
+      check("estimates stamp", "#pricing .text-accent"),
     ];
   });
 
