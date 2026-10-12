@@ -89,7 +89,7 @@ Emphasis is italic display serif — never bold, never color-only.
   shadow travels with it). Press sinks 1px.
 - **Tape** (`.tape`): translucent accent-tinted washi strip with dashed torn
   edges, holding the at-a-glance price tags, the featured tier rows, the
-  WhatsApp row, and the colophon box.
+  Phone row, and the colophon box.
 - **Marker** (`.marker`): highlighter swipe behind the lower ~75% of a word —
   used on the hero's emphasized phrase and featured tier names only.
 - **Stamp** (`.stamp`): double-bordered vermillion label, rotated 2–3° —
@@ -168,12 +168,13 @@ with a hanging indent aligned to the question.
 
 ### Contact (`contact.tsx`)
 
-Enquiries ledger: three cutout rows (WhatsApp / Messenger / Email) — mono
-channel label, large underlined serif action, dotted leader, mono endpoint
-(`wa.me` / `m.me` / `mailto`). WhatsApp row is taped and carries a rotated
-"fastest!" hand note with a doodle arrow. No form. Below: two cutout cards
-(paper fill, not paper-2) — "Have this ready for a quote" and "What happens
-next" — mono headings with serif lists.
+Enquiries ledger: three cutout rows — **Phone** (primary, `tel:` link, taped,
+with the rotated "fastest!" hand note), Messenger, Email — mono channel
+label, large underlined serif action, dotted leader, mono endpoint (`+63…` /
+`m.me` / `mailto`). No form. Below: a full-width "Who you'll work with" card
+listing the three-person team (developer marked), then two cutout cards
+(paper fill) — "Have this ready for a quote" and "What happens next" — mono
+headings with serif lists.
 
 ### Footer (`footer.tsx`)
 

@@ -26,8 +26,8 @@ Project instructions for Kilo and any AI agent working in this repo.
   `images.unoptimized`, `basePath: "/contactus"` (project page at
   https://chie03-dev.github.io/contactus/). This is a purely static,
   informational site: no server runtime, no server actions, no API routes, no
-  forms or third-party submission services. Contact happens via WhatsApp /
-  Messenger / email deep links.
+  forms or third-party submission services. Contact happens via phone /
+  Messenger / email links.
 
 ## Conventions
 
@@ -57,8 +57,8 @@ Project instructions for Kilo and any AI agent working in this repo.
 
 ## Known TODOs before publishing
 
-- Replace all `TODO:REPLACE` values in `src/lib/site.ts` (email, WhatsApp
-  number, Messenger username).
+- Replace the remaining `TODO:REPLACE` values in `src/lib/site.ts` (email,
+  Messenger username).
 - Review seeded prices in `src/content/pricing.ts` (plan-accepted defaults).
 - Deploy repo: https://github.com/Chie03-dev/contactus (GitHub Pages, project
   page at /contactus).

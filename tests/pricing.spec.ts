@@ -78,11 +78,9 @@ test("contact section exposes direct channels with correct hrefs", async ({
   const contact = page.locator("#contact");
 
   await expect(
-    contact.getByRole("link", { name: /whatsapp/i }),
-  ).toHaveAttribute(
-    "href",
-    new RegExp(`^https://wa\\.me/${escapeRegExp(site.whatsapp)}`),
-  );
+    contact.getByRole("link", { name: /call or text/i }),
+  ).toHaveAttribute("href", `tel:${site.phoneHref}`);
+  await expect(contact).toContainText(site.phone);
   await expect(
     contact.getByRole("link", { name: /messenger/i }),
   ).toHaveAttribute("href", `https://m.me/${site.messenger}`);
@@ -92,6 +90,15 @@ test("contact section exposes direct channels with correct hrefs", async ({
 
   expect(await contact.getByRole("link").count()).toBe(3);
   expect(await page.locator("#contact form").count()).toBe(0);
+});
+
+test("team members are listed", async ({ page }) => {
+  const contact = page.locator("#contact");
+  for (const member of site.team) {
+    await expect(contact).toContainText(member);
+  }
+  await expect(page.locator("footer")).toContainText("Luel Cabaltera");
+  await expect(page.locator("footer")).toContainText("Reece Salon");
 });
 
 test("all FAQ questions render and expand", async ({ page }) => {
