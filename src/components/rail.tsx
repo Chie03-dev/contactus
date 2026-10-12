@@ -1,4 +1,5 @@
-import { INDEX_ITEMS, focusRing, underlineLink } from "@/components/ui/link";
+import { INDEX_ITEMS, focusRing, cutoutButtonGhost } from "@/components/ui/link";
+import { DoodleArrow } from "@/components/ui/doodles";
 
 /**
  * Desktop contents rail: sticky down the left edge, roman-numeral index,
@@ -6,7 +7,7 @@ import { INDEX_ITEMS, focusRing, underlineLink } from "@/components/ui/link";
  */
 export function Rail() {
   return (
-    <aside className="sticky top-0 hidden h-screen w-48 shrink-0 border-r border-rule lg:block xl:w-56">
+    <aside className="sticky top-0 hidden h-screen w-48 shrink-0 border-r-2 border-r-ink lg:block xl:w-56">
       <nav
         aria-label="Index"
         className="flex h-full flex-col justify-between px-8 py-16 xl:px-10"
@@ -24,7 +25,7 @@ export function Rail() {
                 >
                   <span
                     aria-hidden
-                    className="w-7 text-rule-strong transition-colors duration-200 group-hover:text-accent"
+                    className="w-7 text-ink transition-colors duration-200 group-hover:text-accent"
                   >
                     {item.num}
                   </span>
@@ -34,10 +35,15 @@ export function Rail() {
             ))}
           </ul>
         </div>
-        <a href="#contact" className={underlineLink}>
-          Request a quote
-          <span aria-hidden> →</span>
-        </a>
+        <div className="relative">
+          <DoodleArrow
+            className="absolute -top-9 left-0 h-8 w-10 -scale-x-100 text-accent"
+          />
+          <a href="#contact" className={cutoutButtonGhost}>
+            Request a quote
+            <span aria-hidden> →</span>
+          </a>
+        </div>
       </nav>
     </aside>
   );

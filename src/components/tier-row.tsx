@@ -8,26 +8,29 @@ interface TierRowProps {
 }
 
 /**
- * One rate-card entry. Name, timeline and unit on the left; price flush right
- * under a dotted leader, like a printed menu. Scope lives in a native
- * <details> so the sheet stays scannable. Featured entries carry a vermillion
- * rule and stamp.
+ * One rate-card entry, taped to the page as a cutout: thick ink border, hard
+ * shadow, name + delivery on the left, price flush right. Scope lives in a
+ * native <details>. Featured entries get a marker swipe, a stamp, and tape.
  */
 export function TierRow({ tier }: TierRowProps) {
   return (
     <article
       data-tier={tier.id}
       className={cn(
-        "border-b border-rule transition-colors duration-200 ease-standard hover:bg-paper-2",
-        tier.featured && "border-l-2 border-l-accent bg-paper-2/60 pl-4",
+        "lift cutout shadow-hard relative mb-5 bg-paper-2 pr-1",
+        tier.featured && "bg-paper-2",
       )}
     >
-      <div className="grid gap-2 py-6 pr-1 sm:grid-cols-[1fr_auto] sm:items-baseline sm:gap-x-8">
+      {tier.featured ? <span aria-hidden className="tape left-8" /> : null}
+
+      <div className="grid gap-2 px-5 py-6 sm:grid-cols-[1fr_auto] sm:items-baseline sm:gap-x-8">
         <div className="min-w-0">
           <h4 className="flex flex-wrap items-baseline gap-x-3 font-display text-2xl leading-tight text-ink">
-            {tier.name}
+            <span className={tier.featured ? "marker" : undefined}>
+              {tier.name}
+            </span>
             {tier.featured ? (
-              <span className="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-accent-deep">
+              <span className="stamp -rotate-3 bg-paper px-2 py-0.5 font-hand text-lg font-bold tracking-wide text-accent-deep">
                 Most requested
               </span>
             ) : null}
@@ -51,7 +54,7 @@ export function TierRow({ tier }: TierRowProps) {
         </p>
       </div>
 
-      <div className="flex flex-wrap items-center gap-x-6 gap-y-2 pb-6 pr-1">
+      <div className="flex flex-wrap items-center gap-x-6 gap-y-2 px-5 pb-6">
         <details className="group/scope">
           <summary
             className={`cursor-pointer list-none font-mono text-xs uppercase tracking-[0.12em] text-ink-muted transition-colors duration-200 ease-standard hover:text-ink [&::-webkit-details-marker]:hidden ${focusRing}`}

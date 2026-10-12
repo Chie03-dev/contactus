@@ -3,7 +3,8 @@ import { faqs, faqIntro } from "@/content/faq";
 import { Section } from "@/components/ui/section";
 import { focusRing } from "@/components/ui/link";
 
-/** FAQ as a Q&A ledger: mono "Q." marks, serif questions, native details. */
+/** FAQ as cutout index cards: mono "Q." marks, serif questions, native
+ *  details, and a + glyph that rotates when open. */
 export function Faq() {
   return (
     <Section
@@ -12,14 +13,20 @@ export function Faq() {
       title={faqIntro.title}
       lede={faqIntro.lede}
     >
-      <div className="mt-14 border-t border-rule">
+      <div className="mt-14 grid gap-5">
         {faqs.map((item) => (
-          <details key={item.id} className="group border-b border-rule">
+          <details
+            key={item.id}
+            className="cutout shadow-hard group bg-paper-2 px-5 py-4"
+          >
             <summary
-              className={`flex cursor-pointer list-none items-baseline gap-4 py-5 [&::-webkit-details-marker]:hidden ${focusRing}`}
+              className={`flex cursor-pointer list-none items-baseline gap-4 [&::-webkit-details-marker]:hidden ${focusRing}`}
             >
-              <span aria-hidden className="font-mono text-sm text-accent">
-                Q.
+              <span
+                aria-hidden
+                className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border-2 border-ink bg-paper font-mono text-xs text-ink"
+              >
+                Q
               </span>
               <h3 className="flex-1 font-display text-xl leading-snug text-ink md:text-2xl">
                 {item.question}
@@ -31,7 +38,7 @@ export function Faq() {
                 +
               </span>
             </summary>
-            <p className="max-w-2xl pb-6 pl-8 font-body leading-relaxed text-ink-muted">
+            <p className="mt-3 max-w-2xl pb-2 pl-11 font-body leading-relaxed text-ink-muted">
               {item.answer}
             </p>
           </details>
