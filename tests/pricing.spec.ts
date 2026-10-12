@@ -110,6 +110,8 @@ test("footer band renders the designed image full-bleed", async ({ page }) => {
   const imgBox = await img.boundingBox();
   const footerBox = await footer.boundingBox();
   expect(imgBox!.width).toBeGreaterThanOrEqual(footerBox!.width - 6);
+  // Half the natural height at the same width: rendered ratio ~2x natural.
+  expect(imgBox!.width / imgBox!.height).toBeGreaterThan(4);
 });
 
 test("team members are listed", async ({ page }) => {

@@ -179,11 +179,13 @@ headings with serif lists.
 ### Footer (`footer.tsx`)
 
 The designed sheet `public/footer.webp` (1859×846) runs **edge to edge**
-inside the frame: `next/image`, `w-full h-auto`, so it scales fluidly from
-desktop to mobile with no crop and no distortion. A 3px ink rule sits above
-it. All text the old colophon carried (name, role, team, disclaimer) lives
-in the image and its alt text; the disclaimer is also present as real text
-in the pricing footnote, and the team is listed in the contact section.
+inside the frame at full width, cropped to **half its natural height**: a
+wrapper pins `aspect-ratio: 1859 / 423` and `object-cover` center-crops the
+artwork, so the band is 50% shorter with no distortion and scales fluidly
+from desktop to mobile. A 3px ink rule sits above it. All text the old
+colophon carried (name, role, team, disclaimer) lives in the image and its
+alt text; the disclaimer is also present as real text in the pricing
+footnote, and the team is listed in the contact section.
 
 ## Placeholder policy
 
