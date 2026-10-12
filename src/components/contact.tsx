@@ -5,7 +5,7 @@ import { focusRing, ledgerLink } from "@/components/ui/link";
 import { DoodleArrow } from "@/components/ui/doodles";
 
 const NEXT_STEPS = [
-  "I reply within 1 business day.",
+  "We reply within 1 business day.",
   "Short discovery call (30 minutes, free).",
   "Fixed scope, price, and timeline in writing.",
 ];
@@ -33,7 +33,7 @@ export function Contact() {
       id="contact"
       eyebrow="§ Contact"
       title="Let’s talk about your project"
-      lede="This site is informational — send a message on whichever channel you prefer and I will take it from there. A call or text gets the fastest reply."
+      lede="This site is informational — send a message on whichever channel you prefer and We will take it from there. A call or text gets the fastest reply."
     >
       <ul className="mt-14 grid gap-6">
         <li className="cutout shadow-hard relative bg-paper-2">
@@ -86,23 +86,20 @@ export function Contact() {
             Who you&apos;ll work with
           </h3>
           <ul className="mt-4 grid gap-2 font-body leading-relaxed text-ink-muted sm:grid-cols-3">
-            {site.team.map((member, index) => (
-              <li key={member} className="flex gap-2.5">
+            {site.team.map((member) => (
+              <li key={member.name} className="flex gap-2.5">
                 <span aria-hidden className="font-mono text-accent">
                   ›
                 </span>
                 <span>
-                  {member}
-                  {index === 0 ? (
-                    <span className="text-ink"> — development</span>
-                  ) : null}
+                  {member.name} — <span className="text-ink">{member.role}</span>
                 </span>
               </li>
             ))}
           </ul>
           <p className="mt-4 font-body text-sm leading-relaxed text-ink-muted">
-            A three-person team. {site.name} is your developer — you talk to
-            the person building the thing, every time.
+            A three-person team covering design, system, and shipping — you
+            talk to the people building the thing, every time.
           </p>
         </div>
         <div className="cutout bg-paper p-6">
