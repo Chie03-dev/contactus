@@ -31,7 +31,7 @@ export const faqs: FaqItem[] = [
     id: "hosting",
     question: "Who pays for hosting and domains?",
     answer:
-      "You do — hosting, domains, and third-party services are billed to your own accounts so you keep full ownership. I set everything up during deployment and recommend options that fit your budget.",
+      "You do — hosting, domains, and third-party services are billed to your own accounts so you keep full ownership. We set everything up during deployment and recommend options that fit your budget.",
   },
   {
     id: "ip",

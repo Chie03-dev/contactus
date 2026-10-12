@@ -114,11 +114,15 @@ test("footer band renders the designed image full-bleed", async ({ page }) => {
   expect(imgBox!.width / imgBox!.height).toBeGreaterThan(4);
 });
 
-test("team members are listed", async ({ page }) => {
+test("team members are listed with their roles", async ({ page }) => {
   const contact = page.locator("#contact");
   for (const member of site.team) {
-    await expect(contact).toContainText(member);
+    await expect(contact).toContainText(member.name);
+    await expect(contact).toContainText(member.role);
   }
+  await expect(contact).toContainText("design");
+  await expect(contact).toContainText("system");
+  await expect(contact).toContainText("shipping");
 });
 
 test("all FAQ questions render and expand", async ({ page }) => {

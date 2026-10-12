@@ -18,7 +18,7 @@ export const processSteps: ProcessStep[] = [
   {
     num: "01",
     title: "Discovery",
-    body: "A free 30-minute call. You describe the problem; I ask about users, constraints, and budget.",
+    body: "A free 30-minute call. You describe the problem; We ask about users, constraints, and budget.",
   },
   {
     num: "02",

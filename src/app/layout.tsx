@@ -46,7 +46,7 @@ const description =
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
-  title: "Rate Card — Web, Mobile & Systems Development (PH)",
+  title: "sireecebiot",
   description,
   keywords: [
     "web development pricing Philippines",
@@ -63,12 +63,12 @@ export const metadata: Metadata = {
     locale: "en_PH",
     url: site.url,
     siteName: site.name,
-    title: "Rate Card — Web, Mobile & Systems Development (PH)",
+    title: "sireecebiot",
     description,
   },
   twitter: {
     card: "summary_large_image",
-    title: "Rate Card — Web, Mobile & Systems Development (PH)",
+    title: "sireecebiot",
     description,
   },
 };

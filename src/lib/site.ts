@@ -18,8 +18,12 @@ export const site = {
   phoneIntl: "+63 956 972 5638",
   phoneHref: "+639569725638",
   messenger: "TODO:REPLACE",
-  /** The three-person team. {site.name} handles development. */
-  team: ["Alchie Andilab", "Luel Cabaltera", "Reece Salon"],
+  /** The three-person team and what each person covers. */
+  team: [
+    { name: "Alchie Andilab", role: "design" },
+    { name: "Luel Cabaltera", role: "system" },
+    { name: "Reece Salon", role: "shipping" },
+  ],
   disclaimer:
     "Prices are starting estimates; final scope and quote are confirmed after discovery.",
 } as const;

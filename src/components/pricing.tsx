@@ -16,7 +16,7 @@ export function Pricing() {
       lede={priceIntro.lede}
     >
       <p className="mt-6 flex items-center gap-2 font-hand text-xl text-accent-deep">
-        pick one — or just ask, I&apos;ll help you choose
+        pick one — or just ask, we&apos;ll help you choose
         <DoodleArrow className="h-8 w-10 -rotate-12 text-accent" />
       </p>
 
