@@ -38,17 +38,20 @@ export function Contact() {
       <ul className="mt-14 grid gap-6">
         <li className="cutout shadow-hard relative bg-paper-2">
           <span aria-hidden className="tape left-8" />
-          <div className="flex items-baseline gap-4 px-5 py-7">
+          <div className="flex flex-wrap items-baseline gap-x-4 gap-y-2 px-5 py-7">
             <span className={labelClass}>Phone</span>
             <a href={`tel:${site.phoneHref}`} className={ledgerLink}>
               Call or text {site.phone}
             </a>
+            {/* Hand note lives in the flow (not absolutely positioned) so it
+                wraps below the action on narrow screens instead of clipping
+                the card edge or sitting on top of the link. */}
+            <span className="rotate-3 font-hand text-lg font-bold leading-none text-accent-deep">
+              fastest! <DoodleArrow className="inline h-5 w-6" />
+            </span>
             <span aria-hidden className="leader" />
             <span className={endpointClass}>{site.phoneIntl}</span>
           </div>
-          <p className="absolute -right-2 -top-3 rotate-6 font-hand text-lg font-bold text-accent-deep">
-            fastest! <DoodleArrow className="inline h-5 w-6 -rotate-90" />
-          </p>
         </li>
         <li className="cutout shadow-hard bg-paper-2">
           <div className="flex items-baseline gap-4 px-5 py-7">

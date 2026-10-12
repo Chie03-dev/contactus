@@ -163,9 +163,10 @@ with a hanging indent aligned to the question.
 ### Contact (`contact.tsx`)
 
 Enquiries ledger: three cutout rows - **Phone** (primary, `tel:` link, taped,
-with the rotated "fastest!" hand note), Messenger, Email - mono channel
+with an inline rotated "fastest!" hand note that wraps below the action on
+narrow screens), Messenger, Email - mono channel
 label, large underlined serif action, dotted leader, mono endpoint (`+63…` /
-`m.me` / `mailto`). No form. Below: a full-width "Who you'll work with" card
+`facebook.com` / `mailto`). No form. Below: a full-width "Who you'll work with" card
 listing the three-person team with their covers - Alchie Andilab (design),
 Luel Cabaltera (system), Reece Salon (shipping) - then two cutout cards
 (paper fill) - "Have this ready for a quote" and "What happens next" - mono
