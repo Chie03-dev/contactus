@@ -1,5 +1,5 @@
 /** Hand-drawn doodles: arrows, stars, circles, underlines. Wobbly paths and
- *  round caps keep them feeling drawn, not clip-art. All decorative —
+ *  round caps keep them feeling drawn, not clip-art. All decorative -
  *  callers wrap them in aria-hidden. */
 
 interface DoodleProps {

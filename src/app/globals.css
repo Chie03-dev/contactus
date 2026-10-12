@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /*
- * Rate Card design system, cartoon-paper edition — see DESIGN.md.
+ * Rate Card design system, cartoon-paper edition - see DESIGN.md.
  * Warm paper, near-black ink, one vermillion accent, marker yellow for
  * highlights. Print discipline: no rounded corners, no gradients, no blur.
  * Depth = thick ink borders + hard offset shadows (cutouts). The sheet is a
@@ -62,7 +62,7 @@
   transform: translateY(-0.3em);
 }
 
-/* Hide scrollbars on horizontal anchor strips (the pill nav) — the strip
+/* Hide scrollbars on horizontal anchor strips (the pill nav) - the strip
    still scrolls by touch, trackpad, and keyboard. */
 .no-scrollbar {
   scrollbar-width: none;

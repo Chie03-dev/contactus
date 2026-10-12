@@ -17,7 +17,8 @@ export const site = {
   phone: "0956 972 5638",
   phoneIntl: "+63 956 972 5638",
   phoneHref: "+639569725638",
-  messenger: "TODO:REPLACE",
+  /** Facebook profile URL (Reece) — used directly as the Messenger link. */
+  messenger: "https://www.facebook.com/reecephil.licayansalon",
   /** The three-person team and what each person covers. */
   team: [
     { name: "Alchie Andilab", role: "design" },

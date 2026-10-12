@@ -12,7 +12,7 @@ import "./globals.css";
 
 // Rate Card type system: Instrument Serif for display, Newsreader for body,
 // IBM Plex Mono for data, Caveat for hand-written annotations (tape labels,
-// margin notes, stamps). Loaded via next/font — no runtime CDN, no shift.
+// margin notes, stamps). Loaded via next/font - no runtime CDN, no shift.
 const display = Instrument_Serif({
   subsets: ["latin"],
   weight: "400",
@@ -42,7 +42,7 @@ const hand = Caveat({
 });
 
 const description =
-  "Transparent PHP pricing for web, mobile, and systems development in the Philippines. Fixed-scope packages with starting-at prices and plain terms.";
+  "Pricing for web, mobile, and systems development in the Philippines. Fixed-scope packages with starting-at prices and plain terms.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -81,7 +81,7 @@ export const viewport: Viewport = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
-  name: `${site.name} — Web, Mobile & Systems Development`,
+  name: `${site.name} - Web, Mobile & Systems Development`,
   description,
   url: site.url,
   areaServed: "PH",

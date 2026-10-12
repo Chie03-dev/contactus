@@ -25,7 +25,7 @@ const endpointClass =
 
 /**
  * Enquiries ledger: one taped cutout per direct channel with a dotted leader
- * between the action and its endpoint. No form — the site is informational.
+ * between the action and its endpoint. No form - the site is informational.
  */
 export function Contact() {
   return (
@@ -33,7 +33,7 @@ export function Contact() {
       id="contact"
       eyebrow="§ Contact"
       title="Let’s talk about your project"
-      lede="This site is informational — send a message on whichever channel you prefer and We will take it from there. A call or text gets the fastest reply."
+      lede="This site is informational - send a message on whichever channel you prefer and we will take it from there. A call or text gets the fastest reply."
     >
       <ul className="mt-14 grid gap-6">
         <li className="cutout shadow-hard relative bg-paper-2">
@@ -54,7 +54,7 @@ export function Contact() {
           <div className="flex items-baseline gap-4 px-5 py-7">
             <span className={labelClass}>Messenger</span>
             <a
-              href={`https://m.me/${site.messenger}`}
+              href={site.messenger}
               target="_blank"
               rel="noopener noreferrer"
               className={ledgerLink}
@@ -62,7 +62,7 @@ export function Contact() {
               Message on Messenger
             </a>
             <span aria-hidden className="leader" />
-            <span className={endpointClass}>m.me</span>
+            <span className={endpointClass}>facebook.com</span>
           </div>
         </li>
         <li className="cutout shadow-hard bg-paper-2">
@@ -92,13 +92,13 @@ export function Contact() {
                   ›
                 </span>
                 <span>
-                  {member.name} — <span className="text-ink">{member.role}</span>
+                  {member.name} - <span className="text-ink">{member.role}</span>
                 </span>
               </li>
             ))}
           </ul>
           <p className="mt-4 font-body text-sm leading-relaxed text-ink-muted">
-            A three-person team covering design, system, and shipping — you
+            A three-person team covering design, system, and shipping - you
             talk to the people building the thing, every time.
           </p>
         </div>

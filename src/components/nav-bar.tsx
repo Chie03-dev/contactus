@@ -9,7 +9,7 @@ const LINKS = [
 ];
 
 /**
- * Sticky header pill — one clean row, pinned just inside the page frame:
+ * Sticky header pill - one clean row, pinned just inside the page frame:
  * brand mark, section links in plain words, quote button. No numerals, no
  * keeper line, no JS. Scrolls with hidden scrollbars below `sm`.
  */

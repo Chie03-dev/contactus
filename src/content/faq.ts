@@ -1,5 +1,5 @@
 /**
- * FAQ content. Rendered as native <details> elements — no client JS needed.
+ * FAQ content. Rendered as native <details> elements - no client JS needed.
  */
 
 export type FaqItem = {
@@ -31,7 +31,7 @@ export const faqs: FaqItem[] = [
     id: "hosting",
     question: "Who pays for hosting and domains?",
     answer:
-      "You do — hosting, domains, and third-party services are billed to your own accounts so you keep full ownership. We set everything up during deployment and recommend options that fit your budget.",
+      "You do - hosting, domains, and third-party services are billed to your own accounts so you keep full ownership. We set everything up during deployment and recommend options that fit your budget.",
   },
   {
     id: "ip",
@@ -43,12 +43,12 @@ export const faqs: FaqItem[] = [
     id: "timeline",
     question: "How accurate are the delivery timelines?",
     answer:
-      "Timelines assume feedback within one business day. Delayed content, feedback, or decisions shift dates — that is stated in the proposal so the trade-off is explicit.",
+      "Timelines assume feedback within one business day. Delayed content, feedback, or decisions shift dates - that is stated in the proposal so the trade-off is explicit.",
   },
   {
     id: "changes",
     question: "What happens if scope changes mid-project?",
     answer:
-      "Change requests are quoted as fixed add-ons before any work starts. Nothing extra is ever billed without your written approval — no surprise invoices.",
+      "Change requests are quoted as fixed add-ons before any work starts. Nothing extra is ever billed without your written approval - no surprise invoices.",
   },
 ];

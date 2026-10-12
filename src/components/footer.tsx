@@ -1,8 +1,8 @@
 /**
  * Footer band: the designed sheet (public/footer.webp) runs edge to edge
  * inside the frame at full width, cropped to half its natural height for a
- * shorter band. All the information the old text footer carried — name,
- * role, team, and the "starting estimates" disclaimer — is preserved in the
+ * shorter band. All the information the old text footer carried - name,
+ * role, team, and the "starting estimates" disclaimer - is preserved in the
  * alt text and mirrored by the pricing footnote on the page.
  */
 export function Footer() {
@@ -14,8 +14,8 @@ export function Footer() {
         images, so an absolute /footer.webp would 404 on GitHub Pages.
         A relative URL resolves against the page and follows the basePath.
 
-        The wrapper pins the aspect at 1859 / 423 — exactly half the image's
-        natural height at the same width — and object-cover center-crops the
+        The wrapper pins the aspect at 1859 / 423 - exactly half the image's
+        natural height at the same width - and object-cover center-crops the
         artwork into it, so the band is 50% shorter without distortion.
       */}
       <div
@@ -25,7 +25,7 @@ export function Footer() {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="footer.webp"
-          alt="Alchie Andilab — Web, Mobile & Systems Developer, Manila, PH. Team: Alchie Andilab · Luel Cabaltera · Reece Salon. Prices are starting estimates; final scope and quote are confirmed after discovery."
+          alt="Alchie Andilab - Web, Mobile & Systems Developer, Manila, PH. Team: Alchie Andilab · Luel Cabaltera · Reece Salon. Prices are starting estimates; final scope and quote are confirmed after discovery."
           width={1859}
           height={846}
           decoding="async"

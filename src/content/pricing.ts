@@ -1,7 +1,7 @@
 /**
  * Single source of truth for every price shown on the site.
  *
- * All values are plan-accepted seed defaults — the user reviews them before
+ * All values are plan-accepted seed defaults - the user reviews them before
  * publishing (see AGENTS.md). Cards render from this data only; no component
  * may hard-code a price, scope line, or timeline.
  */
@@ -32,7 +32,7 @@ export type ServiceGroup = {
 export const priceIntro = {
   eyebrow: "Pricing",
   title: "Fixed-scope packages, starting prices you can plan around",
-  lede: "Every project is quoted as a fixed scope with a fixed price after a short discovery call. Ranges below are honest starting points — what your build actually costs depends on scope, and you will know the number before work starts.",
+  lede: "Every project is quoted as a fixed scope with a fixed price after a short discovery call. Ranges below are honest starting points - what your build actually costs depends on scope, and you will know the number before work starts.",
 };
 
 export const serviceGroups: ServiceGroup[] = [

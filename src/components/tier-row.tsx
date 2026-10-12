@@ -36,7 +36,7 @@ export function TierRow({ tier }: TierRowProps) {
             ) : null}
           </h4>
           <p className="mt-1.5 font-mono text-xs uppercase tracking-[0.12em] text-ink-muted">
-            Delivery — {tier.timeline} · {tier.unit}
+            Delivery - {tier.timeline} · {tier.unit}
           </p>
         </div>
         <p className="sm:text-right">
