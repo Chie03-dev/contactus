@@ -37,7 +37,7 @@ export function Process() {
         ))}
       </div>
       <p className="mt-6 font-hand text-xl text-accent-deep">
-        the first call is free — no pitch deck, we swear
+        the first call is free - no pitch deck, we swear
       </p>
     </Section>
   );

@@ -1,10 +1,10 @@
-/** Shared interaction classes for the rate card — underlined mono links,
+/** Shared interaction classes for the rate card - underlined mono links,
  *  hairline affordances, no pill buttons. */
 
 export const focusRing =
   "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent";
 
-/** Cutout button — thick ink border, hard shadow in accent or ink. */
+/** Cutout button - thick ink border, hard shadow in accent or ink. */
 export const cutoutButton =
   "lift inline-flex items-center justify-center gap-2 border-[2.5px] border-ink px-5 py-2.5 font-mono text-xs uppercase tracking-[0.12em] shadow-hard-accent";
 

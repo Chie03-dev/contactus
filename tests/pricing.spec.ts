@@ -16,7 +16,7 @@ test.beforeEach(async ({ page }) => {
 
 test("hero states the offer with primary CTAs", async ({ page }) => {
   await expect(page.getByRole("heading", { level: 1 })).toContainText(
-    "Transparent pricing for Philippine web, mobile & systems development",
+    "Pricing for Philippine web, mobile & systems development",
   );
   await expect(
     page.getByRole("link", { name: "View pricing" }),
@@ -83,7 +83,7 @@ test("contact section exposes direct channels with correct hrefs", async ({
   await expect(contact).toContainText(site.phone);
   await expect(
     contact.getByRole("link", { name: /messenger/i }),
-  ).toHaveAttribute("href", `https://m.me/${site.messenger}`);
+  ).toHaveAttribute("href", site.messenger);
   await expect(
     contact.getByRole("link", { name: /email/i }),
   ).toHaveAttribute("href", new RegExp(`^mailto:${escapeRegExp(site.email)}`));

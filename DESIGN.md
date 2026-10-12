@@ -1,4 +1,4 @@
-# DESIGN.md — Rate Card token sheet
+# DESIGN.md - Rate Card token sheet
 
 A printed rate card, not a landing page. Warm paper, near-black ink, one
 vermillion accent. Display serif + body serif + mono for data. This file is
@@ -11,7 +11,7 @@ the visual contract: components use these tokens and rules, nothing ad-hoc.
   permanent, not like a SaaS funnel.
 - Cartoon-paper craft layer: the sheet is a *physical object*. Paper grain and
   crumple shading sit behind everything; items are taped, cut out, stamped,
-  and marked like a working rate card on a studio wall. Warm and confident —
+  and marked like a working rate card on a studio wall. Warm and confident -
   never clip-art cute.
 - Print discipline: no rounded corners (except the small circular Q/step
   badges), no blurred shadows, no gradients, no glow. Depth = thick ink
@@ -48,7 +48,7 @@ Three Google fonts loaded via `next/font` (no runtime CDN, no layout shift):
 | Data | IBM Plex Mono 400/500 | `font-mono` |
 | Hand | Caveat 500/700 | `font-hand` |
 
-Hand font is for **margin notes only** (annotations, stamps, asides) — never
+Hand font is for **margin notes only** (annotations, stamps, asides) - never
 for prices, labels, or UI text.
 
 Scale (desktop → mobile):
@@ -64,14 +64,14 @@ Scale (desktop → mobile):
 | Body | 16–18px / 1.7 | Newsreader |
 | Mono labels | 11–12px / 1.4 | IBM Plex Mono, uppercase, `tracking-[0.14em]` |
 
-Emphasis is italic display serif — never bold, never color-only.
+Emphasis is italic display serif - never bold, never color-only.
 
 ## Spacing & layout
 
 - 4px base scale. Sections: `py-24` mobile / `py-32` desktop, horizontal
   padding `px-5 sm:px-8 md:px-12`.
 - Outer shell: `max-w-6xl` (1152px) single content column (`mx-auto`). No
-  side rail — section navigation lives in the sticky pill navbar.
+  side rail - section navigation lives in the sticky pill navbar.
 - Rules: `border-rule` hairlines between every row; `border-[3px] border-ink`
   under group headers (the "bold rule" of print). Masthead sits on a 3px ink
   rule.
@@ -85,14 +85,14 @@ Emphasis is italic display serif — never bold, never color-only.
   behind the frame, `pointer-events: none`. Never place texture above text.
 - **Cutout**: 2.5px ink border + 5px hard offset shadow (`.cutout`,
   `.shadow-hard`; accent shadow `.shadow-hard-accent` for primary buttons).
-  Hover lifts the cutout 2px toward the viewer (transform only, 150ms — the
+  Hover lifts the cutout 2px toward the viewer (transform only, 150ms - the
   shadow travels with it). Press sinks 1px.
 - **Tape** (`.tape`): translucent accent-tinted washi strip with dashed torn
   edges, holding the at-a-glance price tags, the featured tier rows, the
   Phone row, and the colophon box.
-- **Marker** (`.marker`): highlighter swipe behind the lower ~75% of a word —
+- **Marker** (`.marker`): highlighter swipe behind the lower ~75% of a word -
   used on the hero's emphasized phrase and featured tier names only.
-- **Stamp** (`.stamp`): double-bordered vermillion label, rotated 2–3° —
+- **Stamp** (`.stamp`): double-bordered vermillion label, rotated 2–3° -
   "Most requested" (hand font) and "Starting estimates" (mono). One stamp
   per purpose, never more than one visible per section.
 - **Doodles** (`ui/doodles.tsx`): hand-drawn arrow, star, circle, underline
@@ -104,7 +104,7 @@ Emphasis is italic display serif — never bold, never color-only.
 
 ## Motion
 
-- Nearly none — paper doesn&apos;t move. Allowed: 150ms cutout lift (transform
+- Nearly none - paper doesn&apos;t move. Allowed: 150ms cutout lift (transform
   + shadow travel), 150–200ms color transitions, the FAQ `+` glyph rotating
   45° when open, tape/stamp static tilts, and CSS smooth scrolling.
 - No entrance animations, no parallax. `prefers-reduced-motion: reduce`
@@ -118,7 +118,7 @@ Emphasis is italic display serif — never bold, never color-only.
 The only header: one sticky cutout pinned just inside the page frame
 (`sticky top-2 sm:top-3`), centered at `max-w-4xl`, vermillion hard shadow.
 One row, left to right: ₱ mark in an ink square → "RATE CARD" (mono) → ink
-divider → plain section links — Pricing, Process, FAQ, Contact (mono small
+divider → plain section links - Pricing, Process, FAQ, Contact (mono small
 caps; the strip is `overflow-x-auto` with hidden scrollbars below `sm`) →
 "Get a quote →" cutout button (hidden below `sm`). No numerals, no date
 line, no hamburger, no JS.
@@ -136,7 +136,7 @@ The pricing sheet begins immediately below.
   tagline (mono small caps, muted) right, `border-b-[3px] border-ink` rule.
 - Tier rows are taped cutouts (2.5px ink border + hard shadow, `paper-2`
   fill, 20px gap). Row = name (+ marker swipe + "Most requested" stamp for
-  featured) and `Delivery — timeline · unit` (mono, muted) on the left; price
+  featured) and `Delivery - timeline · unit` (mono, muted) on the left; price
   flush right under a mono "Starting at" label; featured price in accent.
 - Scope in a native `<details>`: summary is a mono "Scope +" toggle; open
   state reveals the summary sentence plus scope bullets in a 2-column list
@@ -162,13 +162,13 @@ with a hanging indent aligned to the question.
 
 ### Contact (`contact.tsx`)
 
-Enquiries ledger: three cutout rows — **Phone** (primary, `tel:` link, taped,
-with the rotated "fastest!" hand note), Messenger, Email — mono channel
+Enquiries ledger: three cutout rows - **Phone** (primary, `tel:` link, taped,
+with the rotated "fastest!" hand note), Messenger, Email - mono channel
 label, large underlined serif action, dotted leader, mono endpoint (`+63…` /
 `m.me` / `mailto`). No form. Below: a full-width "Who you'll work with" card
-listing the three-person team with their covers — Alchie Andilab (design),
-Luel Cabaltera (system), Reece Salon (shipping) — then two cutout cards
-(paper fill) — "Have this ready for a quote" and "What happens next" — mono
+listing the three-person team with their covers - Alchie Andilab (design),
+Luel Cabaltera (system), Reece Salon (shipping) - then two cutout cards
+(paper fill) - "Have this ready for a quote" and "What happens next" - mono
 headings with serif lists.
 
 ### Footer (`footer.tsx`)

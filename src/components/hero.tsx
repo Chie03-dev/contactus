@@ -11,7 +11,7 @@ const FACTS = [
   "You own the code",
 ];
 
-/** At-a-glance entry prices — the rate card's summary strip. */
+/** At-a-glance entry prices - the rate card's summary strip. */
 const GLANCE = [
   { label: "Web", from: "₱15,000", tilt: "-rotate-1" },
   { label: "Mobile", from: "₱60,000", tilt: "rotate-1" },
@@ -36,13 +36,13 @@ export function Hero() {
         id="hero-title"
         className="mt-6 max-w-4xl font-display text-[2.6rem] leading-[1.02] tracking-[-0.01em] text-ink sm:text-6xl md:text-7xl"
       >
-        Transparent pricing for{" "}
+        Pricing for{" "}
         <em className="marker italic">Philippine web, mobile &amp; systems</em>{" "}
         development
       </h1>
       <p className="mt-7 max-w-xl font-body text-lg leading-relaxed text-ink-muted">
         Landing pages, business sites, cross-platform apps, and internal
-        systems — scoped and priced before a single line of code. No day-rate
+        systems - scoped and priced before a single line of code. No day-rate
         guessing, no surprise invoices.
       </p>
       <p className="mt-8 font-mono text-xs uppercase leading-relaxed tracking-[0.14em] text-ink-muted">
@@ -61,7 +61,7 @@ export function Hero() {
 
       <div className="mt-16">
         <p className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.14em] text-ink-muted">
-          At a glance — starting at
+          At a glance - starting at
           <DoodleStar className="h-3 w-3 text-accent" />
         </p>
         <dl className="mt-4 grid gap-x-10 gap-y-6 sm:grid-cols-3">
