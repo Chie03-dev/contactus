@@ -61,6 +61,17 @@
   transform: translateY(-0.3em);
 }
 
+/* Hide scrollbars on horizontal anchor strips (the pill nav) — the strip
+   still scrolls by touch, trackpad, and keyboard. */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 /* --- Paper stock ------------------------------------------------------- */
 
 /* Fiber grain: tiled fractal noise, neutralized, at low opacity. */
