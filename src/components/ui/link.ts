@@ -1,11 +1,5 @@
-/** Shared section index used by the desktop rail and the mobile bar. */
-
-export const INDEX_ITEMS = [
-  { num: "I", label: "Pricing", href: "#pricing" },
-  { num: "II", label: "Process", href: "#process" },
-  { num: "III", label: "FAQ", href: "#faq" },
-  { num: "IV", label: "Contact", href: "#contact" },
-] as const;
+/** Shared interaction classes for the rate card — underlined mono links,
+ *  hairline affordances, no pill buttons. */
 
 export const focusRing =
   "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent";
