@@ -113,21 +113,21 @@ Emphasis is italic display serif — never bold, never color-only.
 
 ## Component specs
 
-### Nav pill (`nav-bar.tsx`)
+### Header pill (`nav-bar.tsx`)
 
-The only navigation: a sticky cutout strip pinned just inside the page frame
-(`sticky top-2 sm:top-3`), centered at `max-w-5xl`. Contents, left to right:
-₱ mark in an ink square → "RATE CARD № 01" (mono, hidden below `sm`) → ink
-divider → roman-numeral section links I–IV (mono small caps; the strip is
-`overflow-x-auto` with hidden scrollbars below `sm`) → "Get a quote →"
-cutout button (hidden below `sm`). Accent hard shadow so it reads as taped
-above the sheet. No hamburger, no JS.
+The only header: one sticky cutout pinned just inside the page frame
+(`sticky top-2 sm:top-3`), centered at `max-w-5xl`, vermillion hard shadow.
+Two rows in a single object — never two competing bars:
 
-### Masthead (`masthead.tsx`)
+- **Nav row:** ₱ mark in an ink square → "RATE CARD № 01" (mono, hidden below
+  `sm`) → ink divider → roman-numeral section links I–IV (mono small caps;
+  the strip is `overflow-x-auto` with hidden scrollbars below `sm`) → "Get a
+  quote →" cutout button (hidden below `sm`).
+- **Date row:** 2px ink rule above; left "Alchie Andilab — Web, Mobile &
+  Systems Developer" (role hidden below `sm`, truncated), right "Manila, PH ·
+  MMXXVI", both mono ~11px uppercase muted.
 
-Date line under the pill: mono small caps — left "Alchie Andilab — Web,
-Mobile & Systems Developer", right "Manila, PH · MMXXVI". 3px ink rule
-beneath.
+No hamburger, no JS, no separate masthead.
 
 ### Hero (`hero.tsx`)
 

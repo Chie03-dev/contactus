@@ -2,7 +2,6 @@ import { Contact } from "@/components/contact";
 import { Faq } from "@/components/faq";
 import { Footer } from "@/components/footer";
 import { Hero } from "@/components/hero";
-import { Masthead } from "@/components/masthead";
 import { NavBar } from "@/components/nav-bar";
 import { Pricing } from "@/components/pricing";
 import { Process } from "@/components/process";
@@ -17,7 +16,6 @@ export default function Home() {
       {/* The sheet itself: a thick ink frame, like a printed page. */}
       <div className="relative z-10 m-2 min-h-screen border-[3px] border-ink sm:m-3">
         <NavBar />
-        <Masthead />
         <main id="main" className="mx-auto w-full max-w-6xl">
           <Hero />
           <Pricing />
