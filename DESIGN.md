@@ -70,11 +70,10 @@ Emphasis is italic display serif — never bold, never color-only.
 
 - 4px base scale. Sections: `py-24` mobile / `py-32` desktop, horizontal
   padding `px-5 sm:px-8 md:px-12`.
-- Outer shell: `max-w-6xl` (1152px) split into a 192–224px sticky contents
-  rail (right hairline) + a flexible content column (`min-w-0`). On mobile the
-  rail collapses and anchors move to a fixed bottom bar.
-- Rules: `border-rule` hairlines between every row; `border-2 border-ink`
-  under group headers (the "bold rule" of print). Masthead sits on a 1px ink
+- Outer shell: `max-w-6xl` (1152px) single content column (`mx-auto`). No
+  side rail — section navigation lives in the sticky pill navbar.
+- Rules: `border-rule` hairlines between every row; `border-[3px] border-ink`
+  under group headers (the "bold rule" of print). Masthead sits on a 3px ink
   rule.
 
 ## Cutout & paper-craft system
@@ -114,16 +113,21 @@ Emphasis is italic display serif — never bold, never color-only.
 
 ## Component specs
 
+### Nav pill (`nav-bar.tsx`)
+
+The only navigation: a sticky cutout strip pinned just inside the page frame
+(`sticky top-2 sm:top-3`), centered at `max-w-5xl`. Contents, left to right:
+₱ mark in an ink square → "RATE CARD № 01" (mono, hidden below `sm`) → ink
+divider → roman-numeral section links I–IV (mono small caps; the strip is
+`overflow-x-auto` with hidden scrollbars below `sm`) → "Get a quote →"
+cutout button (hidden below `sm`). Accent hard shadow so it reads as taped
+above the sheet. No hamburger, no JS.
+
 ### Masthead (`masthead.tsx`)
 
-Newspaper top rule: mono small caps — left "Rate Card № 01", center name +
-role, right "Manila, PH". 1px ink rule beneath.
-
-### Contents rail (`rail.tsx`) / mobile bar (`mobile-bar.tsx`)
-
-Roman-numeral index (I–IV) in mono; hover moves the numeral to accent.
-Desktop: sticky, full height, right hairline, ends with "Request a quote →".
-Mobile: fixed bottom bar, `bg-paper/95` + blur, horizontally scrollable.
+Date line under the pill: mono small caps — left "Alchie Andilab — Web,
+Mobile & Systems Developer", right "Manila, PH · MMXXVI". 3px ink rule
+beneath.
 
 ### Hero (`hero.tsx`)
 

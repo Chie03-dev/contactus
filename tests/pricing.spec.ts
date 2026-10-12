@@ -144,10 +144,13 @@ test.describe("mobile 375px", () => {
     expect(overflow).toBeLessThanOrEqual(1);
   });
 
-  test("mobile anchor bar stays usable", async ({ page }) => {
-    const bar = page.getByRole("navigation", { name: "Sections" });
-    await expect(bar).toBeVisible();
-    await expect(bar.getByRole("link", { name: "Contact" })).toBeVisible();
+  test("pill navbar stays usable", async ({ page }) => {
+    const pill = page.getByRole("navigation", { name: "Index" });
+    await expect(pill).toBeVisible();
+    await expect(pill.getByRole("link", { name: "Contact" })).toBeVisible();
+    await expect(pill.getByRole("link", { name: "Get a quote" })).toBeHidden();
+    await pill.getByRole("link", { name: "Pricing" }).click();
+    await expect(page.locator("#pricing")).toBeInViewport();
   });
 });
 
