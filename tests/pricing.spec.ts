@@ -26,7 +26,7 @@ test("hero states the offer with primary CTAs", async ({ page }) => {
   ).toBeVisible();
 });
 
-test("every tier card renders its ₱ starting price, scope, and timeline", async ({
+test("every tier row renders its ₱ starting price, scope, and timeline", async ({
   page,
 }) => {
   for (const group of serviceGroups) {
@@ -36,18 +36,18 @@ test("every tier card renders its ₱ starting price, scope, and timeline", asyn
     ).toBeVisible();
 
     for (const tier of group.tiers) {
-      const card = page.locator(`[data-tier="${tier.id}"]`);
-      await expect(card).toBeVisible();
+      const row = page.locator(`[data-tier="${tier.id}"]`);
+      await expect(row).toBeVisible();
       await expect(
-        card.getByRole("heading", { name: tier.name }),
+        row.getByRole("heading", { name: tier.name }),
       ).toBeVisible();
-      await expect(card).toContainText("Starting at");
-      await expect(card).toContainText(tier.price);
+      await expect(row).toContainText("Starting at");
+      await expect(row).toContainText(tier.price);
       expect(tier.price.startsWith("₱")).toBe(true);
-      await expect(card).toContainText(tier.timeline);
-      await expect(card.locator("li")).toHaveCount(tier.scope.length);
+      await expect(row).toContainText(tier.timeline);
+      await expect(row.locator("li")).toHaveCount(tier.scope.length);
       await expect(
-        card.getByRole("link", { name: "Get a quote" }),
+        row.getByRole("link", { name: "Get a quote" }),
       ).toBeVisible();
     }
   }
@@ -56,8 +56,8 @@ test("every tier card renders its ₱ starting price, scope, and timeline", asyn
   );
 });
 
-test("nav anchors scroll to their sections", async ({ page }) => {
-  const nav = page.getByRole("navigation", { name: "Sections" }).first();
+test("index anchors scroll to their sections", async ({ page }) => {
+  const index = page.getByRole("navigation", { name: "Index" });
   const targets = [
     ["Pricing", "pricing"],
     ["Process", "process"],
@@ -66,7 +66,7 @@ test("nav anchors scroll to their sections", async ({ page }) => {
   ] as const;
 
   for (const [label, id] of targets) {
-    await nav.getByRole("link", { name: label }).click();
+    await index.getByRole("link", { name: label }).click();
     await expect(page).toHaveURL(new RegExp(`#${id}$`));
     await expect(page.locator(`#${id}`)).toBeInViewport();
   }
@@ -76,24 +76,22 @@ test("contact section exposes direct channels with correct hrefs", async ({
   page,
 }) => {
   const contact = page.locator("#contact");
+
   await expect(
-    contact.getByRole("link", { name: "WhatsApp" }),
+    contact.getByRole("link", { name: /whatsapp/i }),
   ).toHaveAttribute(
     "href",
     new RegExp(`^https://wa\\.me/${escapeRegExp(site.whatsapp)}`),
   );
   await expect(
-    contact.getByRole("link", { name: "Messenger" }),
+    contact.getByRole("link", { name: /messenger/i }),
   ).toHaveAttribute("href", `https://m.me/${site.messenger}`);
   await expect(
-    contact.getByRole("link", { name: "Email me" }),
+    contact.getByRole("link", { name: /email/i }),
   ).toHaveAttribute("href", new RegExp(`^mailto:${escapeRegExp(site.email)}`));
 
-  const links = await contact.getByRole("link").all();
-  expect(links.length).toBe(3);
-  expect(
-    await page.locator("#contact form").count(),
-  ).toBe(0);
+  expect(await contact.getByRole("link").count()).toBe(3);
+  expect(await page.locator("#contact form").count()).toBe(0);
 });
 
 test("all FAQ questions render and expand", async ({ page }) => {
@@ -103,6 +101,15 @@ test("all FAQ questions render and expand", async ({ page }) => {
   await first.locator("summary").click();
   await expect(first).toHaveAttribute("open", "");
   await expect(first).toContainText(faqs[0].answer);
+});
+
+test("tier scope details expand with the full scope list", async ({ page }) => {
+  const row = page.locator('[data-tier="web-app"]');
+  const details = row.locator("details");
+  await expect(row.locator("li")).toHaveCount(5); // in DOM, collapsed
+  await details.locator("summary").click();
+  await expect(details).toHaveAttribute("open", "");
+  await expect(details).toContainText("Auth, roles, and user management");
 });
 
 test("skip link is the first tab stop", async ({ page }) => {
@@ -137,20 +144,20 @@ test.describe("mobile 375px", () => {
     expect(overflow).toBeLessThanOrEqual(1);
   });
 
-  test("mobile anchor strip stays usable", async ({ page }) => {
-    const strip = page.locator('header nav[aria-label="Sections"]').last();
-    await expect(strip).toBeVisible();
-    await expect(strip.getByRole("link", { name: "Contact" })).toBeVisible();
+  test("mobile anchor bar stays usable", async ({ page }) => {
+    const bar = page.getByRole("navigation", { name: "Sections" });
+    await expect(bar).toBeVisible();
+    await expect(bar.getByRole("link", { name: "Contact" })).toBeVisible();
   });
 });
 
 test.describe("reduced motion", () => {
   test.use({ reducedMotion: "reduce" });
 
-  test("content renders fully with animation disabled", async ({ page }) => {
-    const card = page.locator('[data-tier="landing-page"]');
-    await expect(card).toBeVisible();
-    const styles = await card.evaluate((el) => {
+  test("content renders fully with motion disabled", async ({ page }) => {
+    const row = page.locator('[data-tier="landing-page"]');
+    await expect(row).toBeVisible();
+    const styles = await row.evaluate((el) => {
       const computed = getComputedStyle(el);
       return {
         animationDuration: computed.animationDuration,
@@ -162,7 +169,7 @@ test.describe("reduced motion", () => {
   });
 });
 
-test("key text meets AA contrast against its background", async ({ page }) => {
+test("key text meets AA contrast against the paper", async ({ page }) => {
   const results = await page.evaluate(() => {
     const parse = (color: string): [number, number, number] => {
       const match = color.match(/rgba?\(([^)]+)\)/);
@@ -187,6 +194,8 @@ test("key text meets AA contrast against its background", async ({ page }) => {
       const [hi, lo] = l1 > l2 ? [l1, l2] : [l2, l1];
       return (hi + 0.05) / (lo + 0.05);
     };
+    // Walk up to the first opaque background so tints (paper-2/60) resolve to
+    // the paper beneath.
     const backgroundOf = (el: Element): string => {
       let node: Element | null = el;
       while (node) {
@@ -198,29 +207,31 @@ test("key text meets AA contrast against its background", async ({ page }) => {
         }
         node = node.parentElement;
       }
-      return "rgb(10, 14, 20)";
+      return "rgb(247, 243, 234)";
     };
     const check = (name: string, selector: string) => {
       const el = document.querySelector(selector);
       if (!el) return { name, ratio: 0, selector };
-      const color = getComputedStyle(el).color;
-      return { name, ratio: contrast(color, backgroundOf(el)), selector };
+      return {
+        name,
+        ratio: contrast(getComputedStyle(el).color, backgroundOf(el)),
+        selector,
+      };
     };
     return [
       check("hero lede", "#hero-title + p"),
       check("pricing lede", "#pricing header p"),
-      check("card summary", '[data-tier="landing-page"] .text-ink-muted'),
+      check("tier meta", '[data-tier="landing-page"] .text-ink-muted'),
       check("tier price", '[data-tier="landing-page"] .text-3xl'),
-      check("section eyebrow", "#pricing header .text-accent"),
-      check("featured badge", '[data-tier="business-site"] .bg-accent'),
-      check("footer disclaimer", "footer .text-xs"),
+      check("section eyebrow", "#pricing header .text-accent-deep"),
+      check("featured stamp", '[data-tier="business-site"] .text-accent-deep'),
+      check("footer disclaimer", "footer .text-sm"),
     ];
   });
 
   for (const result of results) {
     const threshold =
-      result.name === "tier price" ||
-      result.name === "footer disclaimer"
+      result.name === "tier price" || result.name === "footer disclaimer"
         ? 3
         : 4.5;
     expect(

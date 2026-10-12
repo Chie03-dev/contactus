@@ -1,15 +1,40 @@
 import type { Metadata, Viewport } from "next";
+import { IBM_Plex_Mono, Instrument_Serif, Newsreader } from "next/font/google";
 
 import { site } from "@/lib/site";
 
 import "./globals.css";
+
+// Rate Card type system: Instrument Serif for display, Newsreader for body,
+// IBM Plex Mono for data (prices, labels, rules). Loaded via next/font so
+// there is no runtime CDN request and no layout shift.
+const display = Instrument_Serif({
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
+  variable: "--font-instrument",
+  display: "swap",
+});
+
+const body = Newsreader({
+  subsets: ["latin"],
+  variable: "--font-newsreader",
+  display: "swap",
+});
+
+const mono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-plex-mono",
+  display: "swap",
+});
 
 const description =
   "Transparent PHP pricing for web, mobile, and systems development in the Philippines. Fixed-scope packages with starting-at prices and plain terms.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
-  title: "Pricing — Web, Mobile & Systems Development (PH)",
+  title: "Rate Card — Web, Mobile & Systems Development (PH)",
   description,
   keywords: [
     "web development pricing Philippines",
@@ -26,19 +51,19 @@ export const metadata: Metadata = {
     locale: "en_PH",
     url: site.url,
     siteName: site.name,
-    title: "Pricing — Web, Mobile & Systems Development (PH)",
+    title: "Rate Card — Web, Mobile & Systems Development (PH)",
     description,
   },
   twitter: {
     card: "summary_large_image",
-    title: "Pricing — Web, Mobile & Systems Development (PH)",
+    title: "Rate Card — Web, Mobile & Systems Development (PH)",
     description,
   },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0a0e14",
-  colorScheme: "dark",
+  themeColor: "#f7f3ea",
+  colorScheme: "light",
 };
 
 const jsonLd = {
@@ -59,10 +84,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en-PH">
-      <body className="min-h-screen bg-canvas font-sans text-ink antialiased">
+      <body
+        className={`${display.variable} ${body.variable} ${mono.variable} min-h-screen bg-paper font-body text-ink antialiased`}
+      >
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-accent focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-accent-ink"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:border focus:border-ink focus:bg-ink focus:px-4 focus:py-2 focus:font-mono focus:text-xs focus:uppercase focus:tracking-[0.14em] focus:text-paper"
         >
           Skip to content
         </a>

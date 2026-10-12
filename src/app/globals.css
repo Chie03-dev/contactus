@@ -1,113 +1,49 @@
 @import "tailwindcss";
 
 /*
- * Design tokens — see DESIGN.md for the contract. Dark canvas, one accent,
- * mono for data, sans for prose. System font stacks only (no webfont fetch,
- * so the static build stays offline-safe and fast).
+ * Rate Card design system — see DESIGN.md for the full contract.
+ * Warm paper, near-black ink, one vermillion accent. Display serif +
+ * body serif + mono for data. Print discipline: no rounded corners, no
+ * shadows, no gradients, no glow. Depth comes from rules and background
+ * steps (paper -> paper-2), like a printed sheet.
  */
 @theme inline {
-  --color-canvas: #0a0e14;
-  --color-surface: #10151f;
-  --color-surface-2: #161d2a;
-  --color-surface-accent: color-mix(
-    in oklab,
-    var(--color-accent) 7%,
-    var(--color-surface)
-  );
-  --color-ink: #e8ecf3;
-  --color-ink-muted: #9aa7bb;
-  --color-accent: #3de5a0;
-  --color-accent-ink: #04120c;
-  --color-line: #1c2433;
-  --color-line-strong: #2a3547;
+  --color-paper: #f7f3ea;
+  --color-paper-2: #f0ead9;
+  --color-ink: #1c1917;
+  --color-ink-muted: #67614f;
+  --color-accent: #c93a1e;
+  --color-accent-deep: #a82f16;
+  --color-rule: #d8d1bf;
+  --color-rule-strong: #b3aa92;
 
-  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, sans-serif;
-  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
-    "Liberation Mono", monospace;
-
-  --radius-card: 1rem;
+  --font-display: var(--font-instrument);
+  --font-body: var(--font-newsreader);
+  --font-mono: var(--font-plex-mono);
 
   --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
-  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-/* Card/step reveal: fade + 10px lift, staggered per index via inline
-   animation-delay. Transform + opacity only (emil-kowalski/animate.md). */
-@theme {
-  --animate-reveal: reveal 250ms cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-@keyframes reveal {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Faint engineering grid for the hero backdrop; masked to a soft ellipse so
-   it fades out instead of ending in a hard edge. Static — no animation. */
-.bg-grid {
-  background-image:
-    linear-gradient(to right, var(--color-line) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--color-line) 1px, transparent 1px);
-  background-size: 64px 64px;
-  -webkit-mask-image: radial-gradient(
-    ellipse 70% 55% at 50% 0%,
-    #000 30%,
-    transparent 75%
-  );
-  mask-image: radial-gradient(
-    ellipse 70% 55% at 50% 0%,
-    #000 30%,
-    transparent 75%
-  );
 }
 
 @layer base {
   * {
-    border-color: var(--color-line);
+    border-color: var(--color-rule);
   }
 
   html {
     scroll-behavior: smooth;
-    /* Offset anchor jumps for the sticky header (incl. the mobile strip). */
-    scroll-padding-top: 6.5rem;
+    scroll-padding-top: 4rem;
     -webkit-text-size-adjust: 100%;
-    /* Dark canvas: keeps native scrollbars, form controls, and the URL bar
-       hint in the dark scheme instead of light defaults. */
-    color-scheme: dark;
+    color-scheme: light;
   }
 
   body {
-    @apply bg-canvas font-sans text-ink antialiased;
+    @apply bg-paper font-body text-ink antialiased;
     margin: 0;
-    /* Intentional tap feedback tint instead of the default gray box. */
-    -webkit-tap-highlight-color: color-mix(
-      in oklab,
-      var(--color-accent) 25%,
-      transparent
-    );
-  }
-
-  /* Remove the double-tap zoom delay on touch controls. */
-  a,
-  button,
-  summary,
-  label,
-  select,
-  input,
-  textarea {
-    touch-action: manipulation;
   }
 
   ::selection {
     background-color: var(--color-accent);
-    color: var(--color-accent-ink);
+    color: var(--color-paper);
   }
 
   :focus-visible {
@@ -115,8 +51,17 @@
   }
 }
 
-/* Reduced motion is a first-class path: no transforms, no keyframes, no smooth
-   scrolling. Content stays fully visible and static. */
+/* Dotted leader: the space between a rate-card entry and its price, like a
+   printed menu. A flex child that expands to fill the row. */
+.leader {
+  flex: 1 1 auto;
+  min-width: 1.5rem;
+  border-bottom: 1px dotted var(--color-rule-strong);
+  transform: translateY(-0.3em);
+}
+
+/* Reduced motion is a first-class path: no transforms, no keyframes, no
+   smooth scrolling. Content stays fully visible and static. */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

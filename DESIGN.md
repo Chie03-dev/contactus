@@ -1,144 +1,148 @@
-# DESIGN.md — token sheet
+# DESIGN.md — Rate Card token sheet
 
-Dark-premium, "developer-grade" single-page pricing site. This file is the
-visual contract: components must use these tokens and rules, not ad-hoc values.
+A printed rate card, not a landing page. Warm paper, near-black ink, one
+vermillion accent. Display serif + body serif + mono for data. This file is
+the visual contract: components use these tokens and rules, nothing ad-hoc.
 
 ## Mood
 
-- Dark canvas like a well-configured terminal. Calm, precise, expensive.
-- One vivid accent marks *action* and *the most requested item* only.
-- Mono is used for data (prices, eyebrows, numbers, timelines); sans carries
-  prose. No emoji, no decorative icons, no gradients.
+- The page behaves like a printed studio rate card: masthead, rules, dotted
+  leaders, roman-numeral sections, colophon. It should feel considered and
+  permanent, not like a SaaS funnel.
+- Print discipline: zero rounded corners, zero shadows, zero gradients, zero
+  glow. Depth comes only from rules (hairlines) and background steps
+  (`paper` → `paper-2`).
+- No decorative icons, no emoji, no stock imagery. Marks are mono glyphs:
+  `§ № › + →`.
 
 ## Color
 
 | Token | Value | Use |
 |---|---|---|
-| `--color-canvas` | `#0a0e14` | Page background |
-| `--color-surface` | `#10151f` | Cards, form, terminal block |
-| `--color-surface-2` | `#161d2a` | Hover/elevated surface steps |
-| `--color-surface-accent` | `color-mix(in oklab, var(--color-accent) 7%, var(--color-surface))` | Featured tier card fill |
-| `--color-ink` | `#e8ecf3` | Primary text |
-| `--color-ink-muted` | `#9aa7bb` | Secondary text (≥ 7:1 on canvas/surface) |
-| `--color-accent` | `#3de5a0` | The one accent: CTAs, links, featured border, focus ring |
-| `--color-accent-ink` | `#04120c` | Text on accent fills |
-| `--color-line` | `#1c2433` | Default borders/hairlines |
-| `--color-line-strong` | `#2a3547` | Hover borders, emphasized dividers |
+| `--color-paper` | `#f7f3ea` | Page background |
+| `--color-paper-2` | `#f0ead9` | Alt row hover, featured row fill |
+| `--color-ink` | `#1c1917` | Headlines, body, prices |
+| `--color-ink-muted` | `#67614f` | Secondary text (5.6:1 on paper) |
+| `--color-accent` | `#c93a1e` | Vermillion: section marks, rules, stamps, featured price |
+| `--color-accent-deep` | `#a82f16` | Accent text (6.2:1 on paper) |
+| `--color-rule` | `#d8d1bf` | Hairline rules, default borders |
+| `--color-rule-strong` | `#b3aa92` | Group rules, dotted leaders, link underlines |
 
-Contrast floor: body/muted text ≥ 4.5:1 (actual: 8–12:1); large text ≥ 3:1.
-The accent is never used as a background behind muted text.
+Contrast floor: body/muted/accent text ≥ 4.5:1 (actual 5.6–15.8:1), large
+display text ≥ 3:1. Ink (15.8:1) carries all prices; accent appears at large
+sizes only; `accent-deep` whenever accent text is small.
 
 ## Typography
 
-System stacks only (no web-font fetch — keeps the static build offline-safe and
-fast).
+Three Google fonts loaded via `next/font` (no runtime CDN, no layout shift):
 
-- Sans: `--font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`
-- Mono: `--font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace`
-
-Scale (desktop → mobile), tight tracking on display sizes:
-
-| Role | Size / line-height | Weight / tracking |
+| Role | Family | Utility |
 |---|---|---|
-| Display (h1) | 48–56px / 1.05 → 34px mobile | 650, -0.02em |
-| Section title (h2) | 32px / 1.15 → 26px | 650, -0.015em |
-| Card title (h3/h4) | 20px / 1.25 | 600 |
-| Body | 16px / 1.65 | 400 |
-| Small | 14px / 1.55 | 400 |
-| Mono eyebrow/label | 12px / 1.2 | 500, +0.08em, uppercase |
-| Price | 30–36px / 1.1 mono | 600, -0.01em |
+| Display | Instrument Serif 400 (regular + italic) | `font-display` |
+| Body | Newsreader (variable 200–800) | `font-body` |
+| Data | IBM Plex Mono 400/500 | `font-mono` |
+
+Scale (desktop → mobile):
+
+| Role | Size / line-height | Notes |
+|---|---|---|
+| Masthead h1 | 60–72px / 1.02 | Instrument Serif, italic for the emphasized phrase |
+| Section title (h2) | 36–48px / 1.05 | Instrument Serif |
+| Group title (h3) | 30–36px | Instrument Serif, roman numeral prefix in mono |
+| Tier name (h4) | 24px / tight | Instrument Serif |
+| Price | 30px / 1 | Instrument Serif; `text-3xl`, tabular-ish |
+| Enquiry ledger links | 24–30px | Instrument Serif, underlined |
+| Body | 16–18px / 1.7 | Newsreader |
+| Mono labels | 11–12px / 1.4 | IBM Plex Mono, uppercase, `tracking-[0.14em]` |
+
+Emphasis is italic display serif — never bold, never color-only.
 
 ## Spacing & layout
 
-- 4px base scale: 4, 8, 12, 16, 20, 24, 32, 40, 48, 64, 96, 128. Sections:
-  `py-24` mobile / `py-32` desktop. Cards pad 24px (`p-6`).
-- Max content width 1152px (`max-w-6xl`), page gutter 20px / 32px (`px-5 sm:px-8`).
-- Section anchor offset: `scroll-mt-24` on every section (sticky header ≈ 104px
-  with the mobile anchor strip).
+- 4px base scale. Sections: `py-24` mobile / `py-32` desktop, horizontal
+  padding `px-5 sm:px-8 md:px-12`.
+- Outer shell: `max-w-6xl` (1152px) split into a 192–224px sticky contents
+  rail (right hairline) + a flexible content column (`min-w-0`). On mobile the
+  rail collapses and anchors move to a fixed bottom bar.
+- Rules: `border-rule` hairlines between every row; `border-2 border-ink`
+  under group headers (the "bold rule" of print). Masthead sits on a 1px ink
+  rule.
 
-## Radii, borders, elevation
+## Motion
 
-- `--radius-card: 1rem` (cards, form, terminal block). Buttons/chips: `rounded-full`.
-- Borders: 1px `--color-line`; featured card uses accent border.
-- Elevation is background steps + hairline top highlight, not shadow stacks.
-  Allowed shadow (form/terminal only): `0 24px 48px -24px rgba(2, 6, 12, 0.7)`.
-
-## Motion tokens
-
-- Durations: 150ms (press), 200ms (hover), 250ms (reveal/entrance). Exits are
-  faster than entrances.
-- Easing: `--ease-standard: cubic-bezier(0.4, 0, 0.2, 1)`,
-  `--ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1)`.
-- Card hover: `translateY(-2px)` + border-color to `--color-line-strong`, 200ms.
-- Featured-card badge and link arrows may shift 2–3px on hover.
-- Reveal (below-fold cards/steps): opacity + `translateY(10px)`, 250ms,
-  `ease-out-quint`, stagger 60ms per index via inline `animation-delay`.
-- `prefers-reduced-motion: reduce` disables all transforms/keyframes/scroll
-  behavior; content static and fully visible.
-- Focus: 2px `--color-accent` outline, offset 2px, on `:focus-visible` only.
+- Nearly none — print doesn't move. Allowed: 150–200ms color transitions on
+  hover (rows step to `paper-2`, links shift to `accent-deep`), the FAQ `+`
+  glyph rotating 45° when open, and CSS smooth scrolling.
+- No entrance animations, no parallax, no transforms on content. Exits and
+  hovers never exceed 200ms; easing `cubic-bezier(0.4, 0, 0.2, 1)`.
+- `prefers-reduced-motion: reduce` disables all transitions and smooth
+  scrolling; the sheet stays fully static and readable.
 
 ## Component specs
 
-### Header
+### Masthead (`masthead.tsx`)
 
-- Sticky, full width, `bg-canvas/80` + `backdrop-blur`, 1px bottom hairline.
-- Row: mono brand wordmark (left), anchor links `Pricing · Process · FAQ ·
-  Contact` (desktop), primary CTA "Get a quote" → `#contact`.
-- Mobile (< 768px): second row of the same anchors, horizontally scrollable,
-  mono small caps; no hamburger, no JS.
+Newspaper top rule: mono small caps — left "Rate Card № 01", center name +
+role, right "Manila, PH". 1px ink rule beneath.
 
-### Hero
+### Contents rail (`rail.tsx`) / mobile bar (`mobile-bar.tsx`)
 
-- Left-aligned, two columns ≥ 1024px. Mono eyebrow (accent dot + "Transparent
-  PHP pricing"), h1, one-paragraph lede, two CTAs (primary "View pricing",
-  ghost "Get a quote").
-- Right column: terminal-style block (`--color-surface`, mono, hairline, top
-  row of three muted dots). Faint background grid + single radial accent glow;
-  both static, no animation.
-- Trust strip under CTAs: three mono facts, e.g. "Fixed scope up front" /
-  "Milestone billing" / "You own the code".
+Roman-numeral index (I–IV) in mono; hover moves the numeral to accent.
+Desktop: sticky, full height, right hairline, ends with "Request a quote →".
+Mobile: fixed bottom bar, `bg-paper/95` + blur, horizontally scrollable.
 
-### Pricing
+### Hero (`hero.tsx`)
 
-- Groups: Web (3 tiers), Mobile (2 tiers, `sm:grid-cols-2`), Systems
-  (3 tiers incl. retainer, `sm:grid-cols-2 lg:grid-cols-3`).
-- Tier card anatomy, top to bottom: optional featured badge → tier name (h4) →
-  "starting at" mono label + price (mono, 30–36px) + unit → one-line summary →
-  scope list (4–6 items, mono "›" bullets in accent) → timeline row (mono,
-  "Delivery — 1–2 weeks") → bottom CTA link "Get a quote" with arrow.
-- Featured tier: accent border, `--color-surface-accent` fill, badge "Most
-  requested". Exactly one featured tier per group, max three per page.
-- All data comes from `src/content/pricing.ts`; components render only.
+Mono eyebrow (accent-deep) → oversized display headline with italic emphasis
+→ Newsreader lede → mono spec line (` · `-separated facts) → two underlined
+mono links ("View pricing ↓", "Get a quote →"). No card, no glow, no grid.
+The pricing sheet begins immediately below.
 
-### Process
+### Pricing (`pricing.tsx` + `tier-row.tsx`)
 
-- Four steps on a row (≥ 768px), each: mono number `01–04` (accent on the
-  first), step title, one-line description. Hairline top border per step
-  suggests a track; no connecting graphics.
+- Group header: roman numeral (mono, accent) + group name (display) left,
+  tagline (mono small caps, muted) right, `border-b-2 border-ink` rule.
+- Tier rows separated by hairlines. Row = name (+ "Most requested" stamp for
+  featured) and `Delivery — timeline · unit` (mono, muted) on the left; price
+  flush right under a mono "Starting at" label.
+- Scope in a native `<details>`: summary is a mono "Scope +" toggle; open
+  state reveals the summary sentence plus scope bullets in a 2-column list
+  with mono `›` marks.
+- Each row ends with an underlined "Get a quote →" link.
+- Featured row: `border-l-2 border-l-accent`, `paper-2` fill, price in accent,
+  stamp in accent-deep. Exactly one featured row per group.
+- Sheet footnote in mono: "* All prices are starting points, in Philippine
+  pesos." + `site.disclaimer`.
+- Data only from `src/content/pricing.ts`.
 
-### FAQ
+### Process (`process.tsx`)
 
-- Native `<details>`; summary contains the question as `h3`.
-- Plus glyph in mono that rotates 45° when open (transform only, 150ms).
-- Borders between items (`--color-line`), generous tap targets.
+Numbered ledger: hanging mono numerals (first in accent, rest `rule-strong`),
+display step title, one serif line. Hairline rows, `border-t` on the list.
 
-### Contact
+### FAQ (`faq.tsx`)
 
-Two columns ≥ 1024px. Left: three direct-channel buttons — WhatsApp (primary),
-Messenger and Email (ghost), each a real external link with `target="_blank"
-rel="noopener noreferrer"` (email is `mailto:`), plus a reply-time note. Right:
-two stacked cards on `--color-surface` — "Have this ready for a quote" (goal,
-must-haves, deadline/budget) and "What happens next" (reply in 1 business day →
-30-min discovery call → fixed quote in writing). No form: the site is
-informational and fully static, so nothing is submitted anywhere.
+Native `<details>` rows with mono "Q." mark, serif question, `+` glyph that
+rotates 45° when open, answer in Newsreader with a hanging indent.
 
-### Footer
+### Contact (`contact.tsx`)
 
-- Brand, anchor links, GitHub link, disclaimer: "Prices are starting estimates;
-  final scope and quote are confirmed after discovery." + dynamic year.
+Enquiries ledger: three rows (WhatsApp / Messenger / Email) — mono channel
+label, large underlined serif action, dotted leader, mono endpoint
+(`wa.me` / `m.me` / `mailto`). No form. Below: two hairline-topped columns,
+"Have this ready for a quote" and "What happens next", mono headings with
+serif lists.
+
+### Footer (`footer.tsx`)
+
+Colophon: name in display serif, disclaimer, and a mono block — "Set in
+Instrument Serif, Newsreader & IBM Plex Mono · Rate card v1.0 · ₱ · MMXXVI · ©
+year · GitHub" — plus footer anchor links. `pb-20` on mobile clears the
+bottom bar.
 
 ## Placeholder policy
 
-- Every contact value and all prices are seeds. `src/lib/site.ts` holds
-  `TODO:REPLACE` markers that must survive in code until the user swaps them.
-- The footer disclaimer stays regardless of price edits.
+- Contact placeholders stay flagged `TODO:REPLACE` in `src/lib/site.ts` and
+  must never be rendered as visible text (endpoints are shown as mono
+  channel names, not values).
+- Seeded prices stay `TODO`-reviewable with the footer disclaimer.
